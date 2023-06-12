@@ -25,6 +25,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
+
                 android:text="Email"
                 android:layout_marginStart="10dp"
                 android:textSize="14sp"
@@ -37,9 +38,10 @@
 
         </LinearLayout>
         <TextView
-            android:text="longanhminh9@gmail.com"
+            android:id="@+id/textView_email"
+            android:text="Chưa có"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/blue"
             android:textSize="18sp"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"

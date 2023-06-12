@@ -1,6 +1,13 @@
 package com.greenhuecity.view.fragment.navigation;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -17,22 +24,30 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.greenhuecity.R;
+import com.greenhuecity.view.activity.MainActivity;
 import com.greenhuecity.view.activity.SearchActivity;
 import com.greenhuecity.data.contract.HomeContract;
 import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.presenter.HomePresenter;
 import com.greenhuecity.view.adapter.ViewPagerHomeAdapter;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment implements HomeContract.IView {
     TabLayout tabLayout;
@@ -40,6 +55,8 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
     TextInputLayout inputLayout;
     AutoCompleteTextView completeTextView;
     ImageButton btnSearch;
+    TextView tvLocation;
+    CircleImageView imgUser;
     View view;
     List<Cars> carsList;
     HomePresenter mPresenter;
@@ -84,6 +101,9 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
                 if (carsList != null) changeTextSearch();
             }
         }, 2000);
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        mPresenter.getUserLocation(locationManager, (MainActivity) getActivity());
+        mPresenter.getImgUserFromShared(getActivity());
         return view;
     }
 
@@ -93,7 +113,10 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
         inputLayout = view.findViewById(R.id.textInputLayout);
         completeTextView = view.findViewById(R.id.autoCompleteText_search);
         btnSearch = view.findViewById(R.id.imageButton_search);
+        tvLocation = view.findViewById(R.id.textView_addresLocation);
+        imgUser = view.findViewById(R.id.img_user);
     }
+
 
     private void changeTextSearch() {
         try {
@@ -101,7 +124,7 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
             for (Cars cars : carsList) {
                 suggestSearchResults.add(cars.getCar_name());
             }
-            if(suggestSearchResults == null || suggestSearchResults.isEmpty()) return;
+            if (suggestSearchResults == null || suggestSearchResults.isEmpty()) return;
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, suggestSearchResults);
             completeTextView.addTextChangedListener(new TextWatcher() {
@@ -155,6 +178,16 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
         this.carsList = carsList;
         if (carsList != null && textSearch != null) searchTextChangedListener(carsList);
 
+    }
+
+    @Override
+    public void setUserLocation(String address) {
+        tvLocation.setText(address);
+    }
+
+    @Override
+    public void setImgUser(String url) {
+        if (url != null) Glide.with(getActivity()).load(url).into(imgUser);
     }
 
     void intentSearch(List<Cars> carsList) {

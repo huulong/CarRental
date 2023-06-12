@@ -53,7 +53,7 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
 
     Button GetImageFromGalleryButton, UploadImageOnServerButton;
 
-    ImageView showSelectedImage;
+    ImageView showSelectedImage, imgBack;
 
     EditText edtCarName, edtPrice, edtPlates, edtTopSpeed, edtHorsePower, edtMileage, edtDescription;
     TextView tvStatus, tvPower, tvBrand, tvDistributors, tvFromTime, tvEndTime;
@@ -112,17 +112,17 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
         UploadImageOnServerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkBox.isChecked()){
+                if (checkBox.isChecked()) {
                     getDataUpload();
                     if (isCheckDataUpload() == true) {
                         price = Double.parseDouble(textPrice);
                         topSpeed = Double.parseDouble(textTopSpeed);
                         horsePower = Double.parseDouble(textHorse);
                         mileage = Double.parseDouble(textMileage);
-                        mPresenter.uploadCar(nameCar, price, description, licensePlates, status, fromTime, endTime, "No", power_id, brand_id, user_id, distributor_id, topSpeed, horsePower, mileage, convertImage, rndNamePhoto);
+                        mPresenter.uploadCar(nameCar, price, description, licensePlates, status, fromTime, endTime, "Pending", power_id, brand_id, user_id, distributor_id, topSpeed, horsePower, mileage, convertImage, rndNamePhoto);
                     } else notifiError("Không được để trống");
-                }else{
-                    Toast.makeText(UploadCarsActivity.this, "Cần chấp nhận điều khoản", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(UploadCarsActivity.this, "Chưa chấp nhận điều khoản sử dụng", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -175,6 +175,13 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
         tvFromTime = findViewById(R.id.edit_fromTime);
         tvEndTime = findViewById(R.id.edit_endTime);
         checkBox = findViewById(R.id.checkBox);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,LeaseActivity.class));
     }
 
     private void showPictureDialog() {

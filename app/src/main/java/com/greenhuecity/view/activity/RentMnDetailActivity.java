@@ -23,7 +23,7 @@ import java.util.Locale;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RentMnDetailActivity extends AppCompatActivity {
-    ImageView img;
+    ImageView img,imgBack;
     CircleImageView imgUsers;
     TextView tvNameCar, tvTopSpeed, tvHoursPower, tvMileage, tvDescription, tvPrice, tvUsers, tvTimeStart, tvTimeEnd, tvPlates;
     Button btnConfirm, btnRefuse;
@@ -60,6 +60,8 @@ public class RentMnDetailActivity extends AppCompatActivity {
         tvPlates = findViewById(R.id.textView_license_plates);
         btnConfirm = findViewById(R.id.button_confirm);
         btnRefuse = findViewById(R.id.button_refuse);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
     }
 
     private void setData() {

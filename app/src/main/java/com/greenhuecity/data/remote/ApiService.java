@@ -121,4 +121,16 @@ public interface ApiService {
     @FormUrlEncoded
     Call<List<UserOrder>> getOrderByUserId(@Field("id") int id);
 
+    //profile
+    @POST("update-users.php")
+    @FormUrlEncoded
+    Call<Users> updateUser(@Field("id") int id,
+                           @Field("photo") String photo,
+                           @Field("fullname") String fullname,
+                           @Field("email") String email,
+                           @Field("phone") String phone,
+                           @Field("age") String age,
+                           @Field("cccd") String cccd,
+                           @Field("address") String address);
+
 }

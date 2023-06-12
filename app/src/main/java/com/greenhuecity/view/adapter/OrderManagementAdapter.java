@@ -1,11 +1,11 @@
 package com.greenhuecity.view.adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.greenhuecity.R;
 import com.greenhuecity.data.model.OrderManagement;
+import com.greenhuecity.itf.UpdateOrderIF;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -22,15 +23,10 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ManagementCarAdapter extends RecyclerView.Adapter<ManagementCarAdapter.ViewHolder> {
+public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagementAdapter.ViewHolder> {
     private List<OrderManagement> mList;
     private Context mContext;
-
-    public interface UpdateOrderIF {
-        void updateCofirm(int car_id, int order_id);
-
-        void updateRefuse(int car_id, int order_id);
-    }
+    OrderManagement orderManagement;
 
     UpdateOrderIF orderIF;
 
@@ -39,7 +35,7 @@ public class ManagementCarAdapter extends RecyclerView.Adapter<ManagementCarAdap
     }
 
 
-    public ManagementCarAdapter(List<OrderManagement> list, Context context) {
+    public OrderManagementAdapter(List<OrderManagement> list, Context context) {
         mList = list;
         mContext = context;
 
@@ -48,7 +44,7 @@ public class ManagementCarAdapter extends RecyclerView.Adapter<ManagementCarAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_rent, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_order_management, parent, false);
         return new ViewHolder(view);
     }
 
@@ -70,58 +66,7 @@ public class ManagementCarAdapter extends RecyclerView.Adapter<ManagementCarAdap
         holder.tvStatus.setText(orderManagement.getStatus());
         holder.tvPrice.setText(currencyFormatter.format(orderManagement.getRental_costs()));
 
-        int i = position;
-        holder.tvConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProgressDialog progressDialog = new ProgressDialog(mContext);
-                progressDialog.setMessage("Loading..."); // Thiết lập thông điệp
-                progressDialog.setCancelable(false); // Không cho phép hủy
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Loại spinner
-                // Hiển thị ProgressDialog
-                progressDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        orderIF.updateCofirm(orderManagement.getCar_id(), orderManagement.getOrder_id());
-                        mList.remove(i);
-                        notifyDataSetChanged();
-                    }
-                }, 2999);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.dismiss();
-                    }
-                },2999);
-            }
-        });
-        holder.tvRefuse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProgressDialog progressDialog = new ProgressDialog(mContext);
-                progressDialog.setMessage("Loading..."); // Thiết lập thông điệp
-                progressDialog.setCancelable(false); // Không cho phép hủy
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Loại spinner
-                // Hiển thị ProgressDialog
-                progressDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        orderIF.updateRefuse(orderManagement.getCar_id(), orderManagement.getOrder_id());
-                        mList.remove(i);
-                        notifyDataSetChanged();
-                    }
-                }, 2999);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressDialog.dismiss();
-                    }
-                },2999);
-            }
-
-        });
+        eventClickButton(holder, orderManagement);
 
     }
 
@@ -132,7 +77,8 @@ public class ManagementCarAdapter extends RecyclerView.Adapter<ManagementCarAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNameCar, tvPrice, tvCode, tvFromTime, tvEndTime, tvPlates, tvUserName, tvStatus, tvConfirm, tvRefuse;
+        private TextView tvNameCar, tvPrice, tvCode, tvFromTime, tvEndTime, tvPlates, tvUserName, tvStatus, tvComplete;
+        Button btnConfirm, btnRefuse, btnComplete, btnCancel;
         private ImageView imgCar;
         private CircleImageView circleImageView;
 
@@ -148,8 +94,35 @@ public class ManagementCarAdapter extends RecyclerView.Adapter<ManagementCarAdap
             tvEndTime = itemView.findViewById(R.id.textView_endTime);
             tvPlates = itemView.findViewById(R.id.textView_license_plates);
             tvStatus = itemView.findViewById(R.id.textView_status);
-            tvConfirm = itemView.findViewById(R.id.textView_confirm);
-            tvRefuse = itemView.findViewById(R.id.textView_refuse);
+            btnConfirm = itemView.findViewById(R.id.button_confirm);
+            btnRefuse = itemView.findViewById(R.id.button_refuse);
+            tvComplete = itemView.findViewById(R.id.textView_complete);
+            btnComplete = itemView.findViewById(R.id.button_complete);
+            btnCancel = itemView.findViewById(R.id.button_cancel);
         }
+    }
+
+    private void eventClickButton(ViewHolder holder, OrderManagement orderManagement) {
+        String status = orderManagement.getStatus();
+        if (status.equals("Đã hoàn thành") || status.equals("Bị hủy từ khách hàng") || status.equals("Bị hủy từ nhà phân phối") || status.equals("Bị hủy do không nhận xe")) {
+            holder.tvComplete.setVisibility(View.VISIBLE);
+            holder.tvComplete.setText(status.equals("Đã hoàn thành") ? "Complete" : "Bị hủy");
+            holder.btnConfirm.setVisibility(View.GONE);
+            holder.btnRefuse.setVisibility(View.GONE);
+        } else if (status.equals("Đang được thuê")) {
+            holder.btnComplete.setVisibility(View.VISIBLE);
+            holder.btnConfirm.setVisibility(View.GONE);
+            holder.btnRefuse.setVisibility(View.GONE);
+        }else if(status.equals("Đã xác nhận")){
+            holder.btnCancel.setVisibility(View.VISIBLE);
+            holder.btnConfirm.setVisibility(View.GONE);
+            holder.btnRefuse.setVisibility(View.GONE);
+        }
+
+        holder.btnConfirm.setOnClickListener(view2 -> orderIF.updateCofirm(orderManagement.getCar_id(), orderManagement.getOrder_id()));
+        holder.btnRefuse.setOnClickListener(view1 -> orderIF.updateRefuse(orderManagement.getCar_id(), orderManagement.getOrder_id()));
+        holder.btnComplete.setOnClickListener(view -> orderIF.updateComplete(orderManagement.getCar_id(), orderManagement.getOrder_id()));
+        holder.btnCancel.setOnClickListener(view -> orderIF.updateCancel(orderManagement.getCar_id(), orderManagement.getOrder_id()));
+
     }
 }

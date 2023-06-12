@@ -75,6 +75,12 @@
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_edit_password"
             android:text="Change Password" />
+        <TextView
+            android:id="@+id/textView_motorbike.rental"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/motorbike_rent"
+            android:text="Xe cho thuê" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
@@ -89,13 +95,18 @@
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
             android:text="Regional" />
-
+        <TextView
+            android:id="@+id/textView_order"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:drawableLeft="@drawable/motorcycle"
+            android:text="Đơn hàng của bạn"
+            android:visibility="visible"/>
         <TextView
             android:id="@+id/textView_manager"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/analytics"
-            android:text="Quản lý thuê"
-            android:visibility="gone"/>
+            android:text="Quản lý của nhà phân phối"
+            android:visibility="visible"/>
 
         <TextView
             style="@style/viewParent.headerText.settingsTextIcon"
@@ -103,6 +114,7 @@
             android:text="Language" />
 
         <TextView
+            android:id="@+id/textView_logout"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_logout"
             android:text="Logout" />

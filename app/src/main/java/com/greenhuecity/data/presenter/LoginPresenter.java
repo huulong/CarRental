@@ -46,7 +46,7 @@ public class LoginPresenter implements LoginContract.IPresenter {
                     List<Users> mList = response.body();
                     if (mList != null && !mList.isEmpty()) {
                         for (int i = 0; i < mList.size(); i++) {
-                            if (users.equals(mList.get(i).getPhone()) || users.equals(mList.get(i).getEmail()) && password_256.equals(mList.get(i).getPassword()) || password.equals(mList.get(i).getPassword())) {
+                            if ((users.equals(mList.get(i).getPhone()) || users.equals(mList.get(i).getEmail())) && (password_256.equals(mList.get(i).getPassword()) || password.equals(mList.get(i).getPassword()))) {
                                 //save tam thoi tai khoan tren app
                                 Gson gson = new Gson();
                                 String user = gson.toJson(mList.get(i));

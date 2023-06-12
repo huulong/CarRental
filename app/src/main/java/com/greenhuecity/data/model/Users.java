@@ -4,7 +4,7 @@ public class Users {
     int id;
     String email,password,photo,address;
     int age;
-    String fullname,phone,cccd;
+    String fullname,phone, cccd;
 
     public Users(int id, String email, String password, String photo, String address, int age, String fullname, String phone, String cccd) {
         this.id = id;

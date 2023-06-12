@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    >
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:padding="5dp"
+                android:src="@drawable/back" />
+            <TextView
+               android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chỉnh sửa hồ sơ"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
+                android:textSize="22dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgview_imgUser"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/user_dp"
+                    />
+                <Button
+                    android:id="@+id/button_choosephoto"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
+                    android:backgroundTint="#919191"
+                    app:cornerRadius="0dp"
+                    android:padding="0dp"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:layout_gravity="center"
+                    android:text="Chọn ảnh" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="5dp"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/edittext_UserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
+                    android:background="@drawable/background_properties"
+                    android:hint="Tên người dùng..."
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+                <EditText
+                    android:id="@+id/edittext_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_properties"
+                    android:hint="Số điện thoại..."
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <EditText
+            android:id="@+id/edittext_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:background="@drawable/background_properties"
+            android:hint="Địa chỉ email..."
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edittext_age"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_properties"
+                android:hint="Tuổi..."
+                android:textAlignment="center"
+                android:textSize="18dp" />
+            <EditText
+                android:id="@+id/edittext_CCCD"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_properties"
+                android:hint="Số CCCD..."
+                android:textAlignment="center"
+                android:textSize="18dp" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/edittext_Addpress"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_properties"
+            android:hint="Địa chỉ..."
+            android:textAlignment="center"
+            android:textSize="18dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:padding="0dp"
+            android:textSize="18dp"
+            android:background="@drawable/background_properties"
+            app:backgroundTint="@color/blue"
+            android:text="Lưu"/>
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:padding="0dp"
+            android:textSize="18dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/background_properties"
+            app:backgroundTint="@color/gray"
+            android:textColor="@color/black"
+            android:text="Hủy"/>
+    </LinearLayout>
+</RelativeLayout>

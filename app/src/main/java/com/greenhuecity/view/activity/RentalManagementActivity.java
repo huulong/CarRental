@@ -1,6 +1,8 @@
 package com.greenhuecity.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import java.util.List;
 public class RentalManagementActivity extends AppCompatActivity implements RentalManagementContract.IView {
     RecyclerView rvOrder;
     TextView tvQuantity;
+    ImageView imgBack;
     RentalManagementPresenter mPresenter;
     RentManagementAdapter rentMnRvAdapter;
 
@@ -30,12 +33,18 @@ public class RentalManagementActivity extends AppCompatActivity implements Renta
         setContentView(R.layout.activity_rent_management);
         rvOrder = findViewById(R.id.recyclerView_car);
         tvQuantity = findViewById(R.id.textView_quantity);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
         rvOrder.setHasFixedSize(true);
         rvOrder.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mPresenter = new RentalManagementPresenter(this);
         mPresenter.getRentManagementList(mPresenter.getUsersId(this));
-        Toast.makeText(this, mPresenter.getUsersId(this)+"", Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ManagerActivity.class));
     }
 
     @Override

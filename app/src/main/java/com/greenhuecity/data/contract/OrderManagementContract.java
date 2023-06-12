@@ -14,7 +14,7 @@ public interface OrderManagementContract {
     }
     interface IPresenter{
         void getOrderManagementList(int id);
-        int getUsersId(Context context);
+        int getUsersId();
         void updateStatusOrder(int order_id,String order_status,int car_id,String car_status);
     }
 }

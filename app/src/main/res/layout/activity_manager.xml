@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/header_toolbar"
+                    android:id="@+id/img_back"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -57,9 +57,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <LinearLayout
                 android:id="@+id/layout_properties"
@@ -92,24 +90,10 @@
                     android:gravity="center"
                     android:lineHeight="25dp"
                     android:padding="10dp"
-                    android:text="Quản lý đơn hàng đặt thuê xe "
+                    android:text="Quản lý đơn hàng thuê xe "
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:backgroundTint="#F84B9D" />
-
-                <Button
-                    android:id="@+id/btn_order.areRenting"
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/background_properties"
-                    android:gravity="center"
-                    android:lineHeight="25dp"
-                    android:padding="10dp"
-                    android:text="Quản lý xe đang được thuê "
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:backgroundTint="#F84B9D" />
+                    app:backgroundTint="#00BCD4" />
 
 
                 <Button
@@ -127,7 +111,7 @@
                     app:backgroundTint="#009688" />
 
             </LinearLayout>
-        </HorizontalScrollView>
+
     </LinearLayout>
 
 </ScrollView>

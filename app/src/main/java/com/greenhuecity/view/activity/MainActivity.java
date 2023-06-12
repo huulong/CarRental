@@ -50,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        int current = getIntent().getIntExtra("current",0);
+        if(current != 0) {
+            viewPager2.setCurrentItem(current);
+            bottomNavigationView.setSelectedItemId(R.id.nav_setting);
+        }
         // Kiểm tra quyền truy cập vị trí
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // Quyền truy cập vị trí đã được cấp, bắt đầu sử dụng tính năng liên quan đến vị trí

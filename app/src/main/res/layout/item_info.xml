@@ -25,7 +25,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
-                android:text="Mobile"
+                android:text="Số điện thoại"
                 android:layout_marginStart="10dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -37,9 +37,10 @@
 
         </LinearLayout>
         <TextView
-            android:text="+84 382333246"
+            android:id="@+id/textView_phone"
+            android:text="Chưa có"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/blue"
             android:textSize="18sp"
             android:layout_marginStart="25dp"
             android:layout_marginBottom="15dp"
