@@ -1,6 +1,7 @@
 package com.greenhuecity.data.presenter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -22,6 +23,7 @@ import com.greenhuecity.data.model.Powers;
 import com.greenhuecity.data.model.Users;
 import com.greenhuecity.data.remote.ApiService;
 import com.greenhuecity.data.remote.RetrofitClient;
+import com.greenhuecity.view.activity.LeaseActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -107,15 +109,30 @@ public class UploadCarPresenter implements UploadCarContract.IPresenter {
             @Override
             public void onResponse(Call<Cars> call, Response<Cars> response) {
                 progressDialog.dismiss();
+                success();
             }
 
             @Override
             public void onFailure(Call<Cars> call, Throwable t) {
                 progressDialog.dismiss();
+                success();
             }
         });
     }
-
+    private void success(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Cho thuê thành công! Chờ nhà phân phối xác nhận");
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                context.startActivity(new Intent(context, LeaseActivity.class));
+            }
+        }, 4000);
+    }
     @Override
     public int getUsersId() {
         SharedPreferences preferences = context.getSharedPreferences("Success", Context.MODE_PRIVATE);

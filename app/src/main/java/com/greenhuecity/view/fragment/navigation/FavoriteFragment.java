@@ -1,6 +1,8 @@
 package com.greenhuecity.view.fragment.navigation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -21,8 +23,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputLayout;
 import com.greenhuecity.R;
+import com.greenhuecity.view.activity.MainActivity;
 import com.greenhuecity.view.activity.SearchActivity;
 import com.greenhuecity.data.contract.FavoriteContract;
 import com.greenhuecity.data.model.Cars;
@@ -33,6 +37,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FavoriteFragment extends Fragment implements FavoriteContract.IView {
     TextView tvEmpty;
     RecyclerView rvCar;
@@ -41,6 +47,8 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
     TextInputLayout inputLayout;
     AutoCompleteTextView completeTextView;
     ImageButton btnSearch;
+    TextView tvLocation;
+    CircleImageView imgUser;
     List<Cars> carsList;
     String textSearch = "";
 
@@ -52,14 +60,17 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
         rvCar.setHasFixedSize(true);
         rvCar.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         mPresenter = new FavoritePresenter(this, requireContext());
-        mPresenter.getCarList(requireContext());
+        mPresenter.getCarList();
         mPresenter.getCarListAPI();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (carsList != null ) changeTextSearch();
+                if (carsList != null) changeTextSearch();
             }
         }, 2000);
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        mPresenter.getUserLocation(locationManager);
+        mPresenter.getImgUserFromShared();
         return view;
     }
 
@@ -69,6 +80,8 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
         inputLayout = view.findViewById(R.id.textInputLayout);
         completeTextView = view.findViewById(R.id.autoCompleteText_search);
         btnSearch = view.findViewById(R.id.imageButton_search);
+        tvLocation = view.findViewById(R.id.textView_addresLocation);
+        imgUser = view.findViewById(R.id.img_user);
     }
 
     @Override
@@ -93,7 +106,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getCarList(requireContext());
+        mPresenter.getCarList();
     }
 
 
@@ -103,7 +116,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
             for (Cars cars : carsList) {
                 suggestSearchResults.add(cars.getCar_name());
             }
-            if(suggestSearchResults == null || suggestSearchResults.isEmpty()) return;
+            if (suggestSearchResults == null || suggestSearchResults.isEmpty()) return;
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, suggestSearchResults);
             completeTextView.addTextChangedListener(new TextWatcher() {
@@ -166,5 +179,15 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
             intent.putExtra("list", (Serializable) searchList);
             startActivity(new Intent(intent));
         }
+    }
+
+    @Override
+    public void setUserLocation(String address) {
+        tvLocation.setText(address);
+    }
+
+    @Override
+    public void setImgUser(String url) {
+        if (url != null) Glide.with(getActivity()).load(url).into(imgUser);
     }
 }

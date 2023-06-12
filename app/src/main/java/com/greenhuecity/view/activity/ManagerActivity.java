@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import com.greenhuecity.R;
 
 public class ManagerActivity extends AppCompatActivity {
     Button btnLease, btnOrder, btnRevenue;
+    ImageView imgBack;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -23,8 +25,17 @@ public class ManagerActivity extends AppCompatActivity {
         btnRevenue = findViewById(R.id.btn_revenue_statistics);
         btnLease = findViewById(R.id.btn_regis_rental);
         btnOrder = findViewById(R.id.btn_order_rental);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
         eventButton();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("current",3);
+        startActivity(intent);
     }
 
     void eventButton() {

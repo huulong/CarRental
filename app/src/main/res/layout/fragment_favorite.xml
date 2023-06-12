@@ -54,6 +54,7 @@
                     android:textColor="#676565"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/textView_addresLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -66,7 +67,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_logo"
+                android:id="@+id/img_user"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"

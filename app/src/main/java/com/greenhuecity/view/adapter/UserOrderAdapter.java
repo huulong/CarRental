@@ -32,7 +32,8 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
     private List<UserOrder> mList;
     private Context mContext;
     public OnClickButtonUserOrder listener;
-    public void setOnClickButtonOrder(OnClickButtonUserOrder listener){
+
+    public void setOnClickButtonOrder(OnClickButtonUserOrder listener) {
         this.listener = listener;
     }
 
@@ -68,15 +69,29 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
         holder.tvLicensePlates.setText(userOrder.getLicense_plates());
         holder.tvAddress.setText(userOrder.getAddress());
         holder.tvStatus.setText(userOrder.getStatus());
-//        holder.btnConfirm.setVisibility(View.GONE);
-//        holder.btnCancel.setVisibility(View.GONE);
-        if(userOrder.getStatus().equals("Đã xác nhận") || userOrder.getStatus().equals("Chờ xác nhận")){
-            holder.btnCancel.setVisibility(View.VISIBLE);
+
+        switch (userOrder.getStatus()) {
+            case "Đã xác nhận":
+                holder.btnCancel.setVisibility(View.VISIBLE);
+                holder.btnConfirm.setVisibility(View.VISIBLE);
+                break;
+            case "Chờ xác nhận":
+                holder.btnCancel.setVisibility(View.VISIBLE);
+                break;
+            case "Đã hoàn thành":
+                holder.tvComplete.setVisibility(View.VISIBLE);
+                holder.tvComplete.setText("Đã thuê");
+                break;
+            case "Bị hủy từ khách hàng":
+                holder.tvComplete.setVisibility(View.VISIBLE);
+                holder.tvComplete.setText("Bị hủy");
+                break;
+            case "Bị hủy từ nhà phân phối":
+                holder.tvComplete.setVisibility(View.VISIBLE);
+                holder.tvComplete.setText("Bị hủy");
+                break;
         }
-        if(userOrder.getStatus().equals("Đã xác nhận")){
-            holder.btnConfirm.setVisibility(View.VISIBLE);
-        }
-        eventClickButton(holder,userOrder);
+        eventClickButton(holder, userOrder);
 
     }
 
@@ -87,7 +102,7 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvCode, tvLicensePlates, tvNameCar, tvPrice, tvFromTime, tvEndTime, tvDistributor, tvAddress, tvStatus;
+        private TextView tvCode, tvLicensePlates, tvNameCar, tvPrice, tvFromTime, tvEndTime, tvDistributor, tvAddress, tvStatus, tvComplete;
         private ImageView imgCar;
         private CircleImageView circleImageView;
         Button btnLocation, btnCancel, btnConfirm;
@@ -108,13 +123,15 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
             btnLocation = itemView.findViewById(R.id.btn_location);
             btnCancel = itemView.findViewById(R.id.btn_cancel);
             btnConfirm = itemView.findViewById(R.id.btn_confirm);
+            tvComplete = itemView.findViewById(R.id.textView_complete);
         }
     }
-    void eventClickButton(ViewHolder holder,UserOrder userOrder){
+
+    void eventClickButton(ViewHolder holder, UserOrder userOrder) {
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.eventCancelOrder(userOrder.getOrder_id(),userOrder.getCar_id());
+                listener.eventCancelOrder(userOrder.getOrder_id(), userOrder.getCar_id());
                 notifyDataSetChanged();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -123,14 +140,14 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
                         holder.btnConfirm.setVisibility(View.GONE);
 
                     }
-                },2000);
+                }, 2000);
 
             }
         });
         holder.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.eventCompleteOrder(userOrder.getOrder_id(),userOrder.getCar_id());
+                listener.eventCompleteOrder(userOrder.getOrder_id(), userOrder.getCar_id());
                 notifyDataSetChanged();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -138,14 +155,14 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
                         holder.btnCancel.setVisibility(View.GONE);
                         holder.btnConfirm.setVisibility(View.GONE);
                     }
-                },2000);
+                }, 2000);
 
             }
         });
         holder.btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.eventMapView(userOrder.getLatitude(),userOrder.getLongitude());
+                listener.eventMapView(userOrder);
             }
         });
     }

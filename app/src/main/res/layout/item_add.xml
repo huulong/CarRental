@@ -11,7 +11,7 @@
     card_view:cardCornerRAdius="5dp">
     <LinearLayout
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
@@ -30,7 +30,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"/>
                 <TextView
-                    android:text="Address"
+                    android:text="Địa chỉ"
                     android:textSize="16sp"
                     android:layout_margin="5dp"
                     android:textStyle="bold|normal"
@@ -54,40 +54,18 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                app:tint="@color/black"
-                android:padding="2dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/ic_home"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
                 <TextView
-                    android:text="15/427/Nguễn Tất Thành TP.Huế"
+                    android:id="@+id/textView_address"
+                    android:text="Chưa có"
                     android:textSize="17sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/blue"
                     android:textStyle="bold"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginBottom="15dp"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <TextView
-                    android:text="427 Nguyễn Tất Thành, \nThủy Dương,Hương Thủy \n530000"
-                    android:textSize="13sp"
-                    android:textColor="#ED5E5E5E"
-                    android:textStyle="normal"
-                    android:textAlignment="textStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    card_view:ignore="RtlCompat" />
-
-
-            </LinearLayout>
-
-
-
         </LinearLayout>
 
 

@@ -242,6 +242,7 @@
                  android:gravity="center"
                  android:padding="0dp"
                  android:text="Đã nhận được xe"
+                 android:visibility="gone"
                  android:textColor="@color/white"
                  android:textSize="12sp"
                  app:backgroundTint="@color/blue" />
@@ -253,10 +254,21 @@
                  android:gravity="center"
                  android:padding="0dp"
                  android:text="Hủy"
+                 android:visibility="gone"
                  android:layout_alignParentRight="true"
                  android:textColor="@color/white"
                  android:textSize="12sp"
                  app:backgroundTint="#EA2020" />
+             <TextView
+                 android:id="@+id/textView_complete"
+                 android:layout_width="match_parent"
+                 android:layout_height="30dp"
+                 android:text="Đã đặt xe"
+                 android:visibility="gone"
+                 android:textColor="@color/blue"
+                 android:gravity="center"
+                 android:textSize="16sp"
+                 android:textStyle="bold" />
          </RelativeLayout>
         </LinearLayout>
 

@@ -1,6 +1,8 @@
 package com.greenhuecity.data.model;
 
-public class UserOrder {
+import java.io.Serializable;
+
+public class UserOrder implements Serializable {
     int car_id;
     String car_img, car_name, license_plates;
     int distributor_id;

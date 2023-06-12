@@ -35,7 +35,6 @@ public class SettingPresenter implements SettingContract.IPresenter {
         if (!key.isEmpty()) {
             Gson gson = new Gson();
             Users users = gson.fromJson(key, Users.class);
-            Toast.makeText(context, users.getFullname(), Toast.LENGTH_SHORT).show();
             mView.setDataSetting(users.getFullname(),users.getPhoto());
         }
     }

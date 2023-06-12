@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.greenhuecity.R;
@@ -15,12 +16,14 @@ import com.greenhuecity.data.model.UserOrder;
 import com.greenhuecity.data.presenter.UserOrderPresenter;
 import com.greenhuecity.itf.OnClickButtonUserOrder;
 import com.greenhuecity.view.adapter.UserOrderAdapter;
+import com.greenhuecity.view.fragment.bottomsheet.MapBottomSheetFragment;
 
 import java.util.List;
 
 public class UserOrderActivity extends AppCompatActivity implements UserOrderContract.IView {
     RecyclerView rvUserOrder;
     TextView tvTotalOrder;
+    ImageView imgBack;
     int user_id;
     UserOrderPresenter mPresenter;
     UserOrderAdapter userOrderAdapter;
@@ -33,6 +36,8 @@ public class UserOrderActivity extends AppCompatActivity implements UserOrderCon
         setContentView(R.layout.activity_user_order);
         rvUserOrder = findViewById(R.id.recyclerView_order);
         tvTotalOrder = findViewById(R.id.textView_total_order);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
         rvUserOrder.setHasFixedSize(true);
         rvUserOrder.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         //
@@ -50,6 +55,8 @@ public class UserOrderActivity extends AppCompatActivity implements UserOrderCon
         rvUserOrder.setAdapter(userOrderAdapter);
         eventClickButtonItem();
     }
+
+
 
     @Override
     protected void onResume() {
@@ -82,8 +89,9 @@ public class UserOrderActivity extends AppCompatActivity implements UserOrderCon
             }
 
             @Override
-            public void eventMapView(double latitude, double longitude) {
-
+            public void eventMapView(UserOrder userOrder) {
+                MapBottomSheetFragment bottomSheetFragment = MapBottomSheetFragment.newInstance(userOrder);
+                bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
             }
         });
     }
