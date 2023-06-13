@@ -68,8 +68,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
                 if (carsList != null) changeTextSearch();
             }
         }, 2000);
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        mPresenter.getUserLocation(locationManager);
+        mPresenter.getUserLocation();
         mPresenter.getImgUserFromShared();
         return view;
     }

@@ -11,12 +11,13 @@ public interface EditProfileContract {
         void updateSuccess();
 
         void updateFailed(String mess);
+
+        void reUpdateSharedUser(Users users);
     }
 
     interface IPresenter {
-        Users getDataProfileFromShared();
-
-        void updateProfileInformation(int id, String photo, String name, String phone, String email, String address, String age, String cccd, Users users);
-        void updateShared(Users users);
+        void getDataProfileFromShared();
+        void updateProfileInformation(int id, String photo, String name, String phone, String email, String address, String age, String cccd);
+        void reGetListUser(int id);
     }
 }

@@ -132,5 +132,8 @@ public interface ApiService {
                            @Field("age") String age,
                            @Field("cccd") String cccd,
                            @Field("address") String address);
+    @POST("get-user-by-id.php")
+    @FormUrlEncoded
+    Call<List<Users>> getUsersById(@Field("id") int id);
 
 }

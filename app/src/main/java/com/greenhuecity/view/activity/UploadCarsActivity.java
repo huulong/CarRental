@@ -249,7 +249,7 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
         tvDistributors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectDialog.setTitle("Chọn trạng thái");
+                selectDialog.setTitle("Chọn nhà phân phối");
                 List<String> distributorItems = new ArrayList<>();
                 Map<String, Integer> distributorIdMap = new HashMap<>();
 

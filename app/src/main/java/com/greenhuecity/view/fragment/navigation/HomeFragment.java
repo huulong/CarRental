@@ -101,8 +101,8 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
                 if (carsList != null) changeTextSearch();
             }
         }, 2000);
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        mPresenter.getUserLocation(locationManager, (MainActivity) getActivity());
+
+        mPresenter.getUserLocation((MainActivity) getActivity());
         mPresenter.getImgUserFromShared(getActivity());
         return view;
     }

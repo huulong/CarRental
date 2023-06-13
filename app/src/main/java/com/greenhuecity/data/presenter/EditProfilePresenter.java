@@ -7,13 +7,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.greenhuecity.data.contract.EditProfileContract;
 import com.greenhuecity.data.model.Users;
 import com.greenhuecity.data.remote.ApiService;
 import com.greenhuecity.data.remote.RetrofitClient;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,24 +36,24 @@ public class EditProfilePresenter implements EditProfileContract.IPresenter {
     }
 
     @Override
-    public Users getDataProfileFromShared() {
+    public void getDataProfileFromShared() {
         SharedPreferences preferences = context.getSharedPreferences("Success", Context.MODE_PRIVATE);
         String key = preferences.getString("users", "");
         if (!key.isEmpty()) {
             Gson gson = new Gson();
             Users users = gson.fromJson(key, Users.class);
-            return users;
+            mView.setDataProfile(users);
         }
-        return null;
     }
 
     @Override
-    public void updateProfileInformation(int id, String photo, String fullname, String phone, String email, String address, String age, String cccd, Users users) {
-        if (id == 0 || photo == null || fullname.isEmpty() || phone.isEmpty() || email.isEmpty() || address.isEmpty() || age.isEmpty() || cccd.isEmpty()) {
-            mView.updateFailed("Vui lòng nhập đầy đủ thông tin");
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || !Patterns.PHONE.matcher(phone).matches() ||
-                !TextUtils.isDigitsOnly(age) || !TextUtils.isDigitsOnly(cccd) || cccd.length() != 12) {
+    public void updateProfileInformation(int id, String photo, String fullname, String phone, String email, String address, String age, String cccd) {
+        if (id == 0 || fullname.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+            mView.updateFailed("Vui lòng nhập thông tin cần thiết");
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || !Patterns.PHONE.matcher(phone).matches()) {
             mView.updateFailed("Thông tin không hợp lệ!");
+        } else if ((!age.isEmpty() || !cccd.isEmpty()) && (!TextUtils.isDigitsOnly(age) || !TextUtils.isDigitsOnly(cccd) || cccd.length() != 12)) {
+            mView.updateFailed("Định dạng không hợp lệ!");
         } else {
             progressDialog = ProgressDialog.show(context, "Loading...", "Please wait .....", false, false);
             apiService.updateUser(id, photo, fullname, email, phone, age, cccd, address).enqueue(new Callback<Users>() {
@@ -60,35 +64,45 @@ public class EditProfilePresenter implements EditProfileContract.IPresenter {
                         public void run() {
                             progressDialog.dismiss();
                             mView.updateSuccess();
-                            Users nUsers = new Users(id, email, users.getPassword(), photo, address, Integer.parseInt(age), fullname, phone, cccd);
-                            updateShared(nUsers);
+
                         }
                     }, 2000);
+                    reGetListUser(id);
                 }
 
                 @Override
                 public void onFailure(Call<Users> call, Throwable t) {
+                    Log.e("TAG", "onFailure: " + t.getMessage());
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             progressDialog.dismiss();
                             mView.updateSuccess();
-                            Users nUsers = new Users(id, email, users.getPassword(), photo, address, Integer.parseInt(age), fullname, phone, cccd);
-                            updateShared(nUsers);
                         }
                     }, 2000);
+                    reGetListUser(id);
+
                 }
             });
+
         }
     }
 
     @Override
-    public void updateShared(Users users) {
-        Gson gson = new Gson();
-        String user = gson.toJson(users);
-        SharedPreferences.Editor editor = context.getSharedPreferences("Success", MODE_PRIVATE).edit();
-        editor.remove("users");
-        editor.putString("users", user);
-        editor.apply();
+    public void reGetListUser(int id) {
+        apiService.getUsersById(id).enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                List<Users> mList = response.body();
+                mView.reUpdateSharedUser(mList.get(0));
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
+
+            }
+        });
     }
+
+
 }

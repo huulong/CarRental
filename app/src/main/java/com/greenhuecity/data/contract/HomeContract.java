@@ -21,7 +21,7 @@ public interface HomeContract {
     interface IPresenter{
         void getCarList();
         List<Cars> filterCarList(String searchText,List<Cars> carsList);
-        void getUserLocation(LocationManager locationManager, MainActivity activity);
+        void getUserLocation(MainActivity activity);
         void getImgUserFromShared(Context context);
     }
 }

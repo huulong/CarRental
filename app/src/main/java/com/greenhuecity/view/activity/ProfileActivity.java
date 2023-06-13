@@ -18,8 +18,7 @@ import com.greenhuecity.data.presenter.ProfilePresenter;
 
 public class ProfileActivity extends AppCompatActivity implements ProfileContract.IView {
     TextView tvUserName, tvAddress, tvEmail, tvPhone, tvCCCD;
-    ImageView imgUser;
-    Button btnEdit;
+    ImageView imgUser, btnEdit,imgBack;
     ProfilePresenter mPresenter;
 
     @Override
@@ -29,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileContrac
         initGUI();
         mPresenter = new ProfilePresenter(this);
         mPresenter.getDataProfileFromShared(this);
-        btnEdit.setOnClickListener(view->startActivity(new Intent(this,EditProfileActivity.class)));
+        btnEdit.setOnClickListener(view -> startActivity(new Intent(this, EditProfileActivity.class)));
     }
 
     private void initGUI() {
@@ -40,6 +39,15 @@ public class ProfileActivity extends AppCompatActivity implements ProfileContrac
         tvCCCD = findViewById(R.id.textView_cccd);
         imgUser = findViewById(R.id.imageView_user);
         btnEdit = findViewById(R.id.button_edit);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("current",3);
+        startActivity(intent);
     }
 
     @Override

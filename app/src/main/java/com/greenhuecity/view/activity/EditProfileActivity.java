@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.greenhuecity.R;
 import com.greenhuecity.data.contract.EditProfileContract;
 
@@ -47,7 +49,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     private int GALLERY = 1, CAMERA = 2;
     EditProfilePresenter mPresenter;
     AlertDialog.Builder selectDialog;
-    Users sharedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         byteArrayOutputStream = new ByteArrayOutputStream();
 
         mPresenter = new EditProfilePresenter(this, this);
-        sharedUser = mPresenter.getDataProfileFromShared();
-        setDataProfile(sharedUser);
+        mPresenter.getDataProfileFromShared();
         buttonClickEvent();
 
     }
@@ -93,7 +93,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                     byteArray = byteArrayOutputStream.toByteArray();
                     convertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
                 }
-                mPresenter.updateProfileInformation(user_id, convertImage, userName, phone, email, address, age, cccd,sharedUser);
+                mPresenter.updateProfileInformation(user_id, convertImage, userName, phone, email, address, age, cccd);
             }
 
         });
@@ -189,9 +189,10 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
             if (users.getEmail() != null) edtEmail.setText(users.getEmail());
             if (users.getPhone() != null) edtPhone.setText(users.getPhone());
             if (users.getCccd() != null) edtCCCD.setText(users.getCccd());
-            if (users.getPhoto() != null ) {
-                    Glide.with(this).load(users.getPhoto()).into(showSelectedImage);
-                    convertImage = users.getPhoto();
+            if (users.getAge() != 0) edtCCCD.setText(users.getAge() + "");
+            if (users.getPhoto() != null) {
+                Glide.with(this).load(users.getPhoto()).into(showSelectedImage);
+                convertImage = users.getPhoto();
             }
         }
     }
@@ -203,7 +204,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this,ProfileActivity.class));
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 
     @Override
@@ -219,5 +220,15 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 dialog.dismiss();
             }
         }, 3000);
+    }
+
+    @Override
+    public void reUpdateSharedUser(Users users) {
+        Gson gson = new Gson();
+        String user = gson.toJson(users);
+        SharedPreferences.Editor editor = getSharedPreferences("Success", MODE_PRIVATE).edit();
+        editor.remove("users");
+        editor.putString("users", user);
+        editor.apply();
     }
 }
