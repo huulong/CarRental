@@ -1,8 +1,10 @@
 package com.greenhuecity.view.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.greenhuecity.R;
+import com.greenhuecity.data.contract.RentailMnDetailContract;
 import com.greenhuecity.data.model.RentManagement;
 import com.greenhuecity.data.presenter.RentalMnDetailPresenter;
 
@@ -22,7 +25,7 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RentMnDetailActivity extends AppCompatActivity {
+public class RentMnDetailActivity extends AppCompatActivity implements RentailMnDetailContract.IView{
     ImageView img,imgBack;
     CircleImageView imgUsers;
     TextView tvNameCar, tvTopSpeed, tvHoursPower, tvMileage, tvDescription, tvPrice, tvUsers, tvTimeStart, tvTimeEnd, tvPlates;
@@ -37,10 +40,8 @@ public class RentMnDetailActivity extends AppCompatActivity {
         initGUI();
         //get intent
         rentManagement = (RentManagement) getIntent().getSerializableExtra("list");
-
         setData();
-//
-        mPresenter = new RentalMnDetailPresenter(this);
+        mPresenter = new RentalMnDetailPresenter(this,this);
         eventButton();
 
     }
@@ -99,4 +100,20 @@ public class RentMnDetailActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void notificationUpdate(String mess) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông báo");
+        builder.setMessage(mess);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                onBackPressed();
+            }
+        },2000);
+
+    }
 }

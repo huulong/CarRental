@@ -75,7 +75,7 @@ public class OrderManagementActivity extends AppCompatActivity implements OrderM
 
             @Override
             public void updateRefuse(int car_id, int order_id) {
-                mPresenter.updateStatusOrder(order_id, "Bị hủy từ nhà phân phối", car_id, "Đang rảnh");
+                mPresenter.updateStatusOrder(order_id, "Bị hủy", car_id, "Đang rảnh");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -97,7 +97,7 @@ public class OrderManagementActivity extends AppCompatActivity implements OrderM
 
             @Override
             public void updateCancel(int car_id, int order_id) {
-                mPresenter.updateStatusOrder(order_id, "Bị hủy do không nhận xe", car_id, "Đang rảnh");
+                mPresenter.updateStatusOrder(order_id, "Bị hủy", car_id, "Đang rảnh");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

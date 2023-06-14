@@ -25,6 +25,7 @@ public class RentalManagementActivity extends AppCompatActivity implements Renta
     ImageView imgBack;
     RentalManagementPresenter mPresenter;
     RentManagementAdapter rentMnRvAdapter;
+    int user_id = 0;
 
 
     @Override
@@ -38,13 +39,15 @@ public class RentalManagementActivity extends AppCompatActivity implements Renta
         rvOrder.setHasFixedSize(true);
         rvOrder.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mPresenter = new RentalManagementPresenter(this);
-        mPresenter.getRentManagementList(mPresenter.getUsersId(this));
+        user_id = mPresenter.getUsersId(this);
+        mPresenter.getRentManagementList(user_id);
 
     }
 
     @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, ManagerActivity.class));
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getRentManagementList(user_id);
     }
 
     @Override

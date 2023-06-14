@@ -40,7 +40,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.IView
         usersList = new ArrayList<>();
         initGUI();
         mPresenter = new RegisterPresenter(this,loginActivity);
-        mPresenter.getListCar();
+        mPresenter.getUsersList();
         events();
         return view;
     }
@@ -49,7 +49,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.IView
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getListCar();
                 String fullName = edtFullName.getText().toString();
                 String email = edtEmail.getText().toString();
                 String phone = edtPhone.getText().toString();
@@ -57,14 +56,15 @@ public class RegisterFragment extends Fragment implements RegisterContract.IView
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mPresenter.loadingRegister(fullName,password,email,phone,usersList);
+                        mPresenter.register(fullName,password,email,phone,usersList);
                     }
-                },1500);
+                },500);
             }
         });
         igBack.setOnClickListener(view->loginActivity.viewPager2.setCurrentItem(0));
         tvLogin.setOnClickListener(view1->loginActivity.viewPager2.setCurrentItem(0));
     }
+
 
     private void initGUI(){
         edtEmail = view.findViewById(R.id.textEmail);
@@ -95,7 +95,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.IView
     @Override
     public void showErrorMessage(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Đăng ký thất bại!");
+        builder.setTitle("Failed!");
         builder.setMessage(message);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -108,7 +108,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.IView
     }
 
     @Override
-    public void setListCar(List<Users> list) {
+    public void setUsersList(List<Users> list) {
         usersList = list;
     }
 }

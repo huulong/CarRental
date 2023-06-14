@@ -9,13 +9,12 @@ public interface RegisterContract {
     interface IView{
         void showSuccessMessage(String message);
         void showErrorMessage(String message);
-        void setListCar( List<Users> usersList);
+        void setUsersList( List<Users> usersList);
 
     }
     interface IPresenter{
         void register(String name,String password,String email,String phone,List<Users> mList);
-        void loadingRegister(String name,String password,String email,String phone,List<Users> mList);
-        void getListCar();
+        void getUsersList();
         boolean isExistUsers(String email, String phone,List<Users> usersList);
     }
 }

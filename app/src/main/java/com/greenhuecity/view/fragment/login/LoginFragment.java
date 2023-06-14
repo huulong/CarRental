@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment implements LoginContract.IView {
             public void onClick(View v) {
                 String uses = edtUser.getText().toString();
                 String password = edtPassword.getText().toString();
-                mPresenter.loadingLogin(uses, password, requireContext());
+                mPresenter.login(uses, password, requireContext());
             }
         });
         igBack.setOnClickListener(view -> startActivity(new Intent(requireContext(),MainActivity.class)));
@@ -78,7 +78,7 @@ public class LoginFragment extends Fragment implements LoginContract.IView {
                 dialog.dismiss();
                 startActivity(new Intent(requireContext(), MainActivity.class));
             }
-        }, 3000);
+        }, 2000);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment implements LoginContract.IView {
             public void run() {
                 dialog.dismiss();
             }
-        }, 3000);
+        }, 2000);
     }
 
 

@@ -19,21 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.LeaseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.UserOrderActivity"
-            android:exported="true" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBGG0rldiCyzp45Pu_XBEHExPrpWfpBUQ0" />
-
-        <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".util.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -43,20 +29,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.CarDetailActivity"
+            android:name=".view.activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.LeaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.UserOrderActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBGG0rldiCyzp45Pu_XBEHExPrpWfpBUQ0" />
+
+        <activity
+            android:name=".view.activity.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".view.activity.CarDetailActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.RentCarActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.SearchActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.UploadCarsActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.LoginActivity"
@@ -64,23 +69,23 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.OrderManagementActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.RentalManagementActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.RentMnDetailActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ManagerActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ProfileActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
     </application>
 

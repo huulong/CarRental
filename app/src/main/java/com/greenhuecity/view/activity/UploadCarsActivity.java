@@ -67,9 +67,11 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
 
     String convertImage;
 
-    String nameCar, licensePlates, description, status, fromTime, endTime, rndNamePhoto, textPrice, textTopSpeed, textHorse, textMileage;
-    int power_id, brand_id, distributor_id, user_id;
-    double price, topSpeed, horsePower, mileage;
+    String nameCar, licensePlates, description, status, fromTime, endTime, rndNamePhoto, price, topSpeed, horsePower, mileage;
+    int power_id =0;
+    int brand_id = 0;
+    int distributor_id=0;
+    int user_id = 0;
 
     private int GALLERY = 1, CAMERA = 2;
     UploadCarPresenter mPresenter;
@@ -114,13 +116,7 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
             public void onClick(View view) {
                 if (checkBox.isChecked()) {
                     getDataUpload();
-                    if (isCheckDataUpload() == true) {
-                        price = Double.parseDouble(textPrice);
-                        topSpeed = Double.parseDouble(textTopSpeed);
-                        horsePower = Double.parseDouble(textHorse);
-                        mileage = Double.parseDouble(textMileage);
-                        mPresenter.uploadCar(nameCar, price, description, licensePlates, status, fromTime, endTime, "Pending", power_id, brand_id, user_id, distributor_id, topSpeed, horsePower, mileage, convertImage, rndNamePhoto);
-                    } else notifiError("Không được để trống");
+                    mPresenter.uploadCar(nameCar, price, description, licensePlates, status, fromTime, endTime, "Pending", power_id, brand_id, user_id, distributor_id, topSpeed, horsePower, mileage, convertImage, rndNamePhoto);
                 } else {
                     Toast.makeText(UploadCarsActivity.this, "Chưa chấp nhận điều khoản sử dụng", Toast.LENGTH_SHORT).show();
                 }
@@ -136,25 +132,17 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
         status = tvStatus.getText().toString();
         fromTime = tvFromTime.getText().toString();
         endTime = tvEndTime.getText().toString();
-        textPrice = edtPrice.getText().toString();
-        textTopSpeed = edtTopSpeed.getText().toString();
-        textHorse = edtHorsePower.getText().toString();
-        textMileage = edtMileage.getText().toString();
+        price = edtPrice.getText().toString();
+        topSpeed = edtTopSpeed.getText().toString();
+        horsePower = edtHorsePower.getText().toString();
+        mileage = edtMileage.getText().toString();
+
         if (FixBitmap != null && FixBitmap.getWidth() > 0 && FixBitmap.getHeight() > 0) {
             FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
             byteArray = byteArrayOutputStream.toByteArray();
             convertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
 
-    }
-
-    private boolean isCheckDataUpload() {
-        if (nameCar != null && licensePlates != null && description != null && status != null &&
-                textPrice != null && textTopSpeed != null && textHorse != null && textMileage != null &&
-                convertImage != null && user_id != 0 && distributor_id != 0 && brand_id != 0 && power_id != 0) {
-            return true;
-        }
-        return false;
     }
 
     private void initGUI() {
@@ -179,10 +167,6 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
         imgBack.setOnClickListener(view->onBackPressed());
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this,LeaseActivity.class));
-    }
 
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
@@ -320,6 +304,7 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
 
     @Override
     public void setDataStatusList(List<String> statusItems) {
+        tvStatus.setText(statusItems.get(0));
         tvStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -339,6 +324,37 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
     public void notifiError(String mess) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Lỗi!");
+        builder.setMessage(mess);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void notifiSuccess() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Cho thuê thành công.Chờ nhà phân phối xác nhận");
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                onBackPressed();
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void notifiUploadFailed(String mess) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Lỗi");
         builder.setMessage(mess);
         AlertDialog dialog = builder.create();
         dialog.show();

@@ -1,5 +1,6 @@
 package com.greenhuecity.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -22,5 +23,10 @@ public class LoginActivity extends AppCompatActivity {
         viewPager2.setUserInputEnabled(false);
         viewPager2.setCurrentItem(0);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
     }
 }

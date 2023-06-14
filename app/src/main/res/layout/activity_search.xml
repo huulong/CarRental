@@ -20,13 +20,13 @@
             android:id="@+id/cardView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/header_toolbar"
+                android:id="@+id/img_back"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -34,7 +34,14 @@
                 android:src="@drawable/back" />
         </androidx.cardview.widget.CardView>
 
-        <!--                -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tìm kiếm"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
 
 
     </LinearLayout>
@@ -67,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:scrollbars="horizontal">
+        android:scrollbars="none">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_car"
             android:layout_width="match_parent"

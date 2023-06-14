@@ -1,6 +1,7 @@
 package com.greenhuecity.view.activity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
     RecyclerView rvSearch;
     TextView tvResult;
+    ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         rvSearch = findViewById(R.id.recyclerView_car);
         tvResult = findViewById(R.id.text_result);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
         rvSearch.setHasFixedSize(true);
         rvSearch.setLayoutManager(new GridLayoutManager(this,3));
         List<Cars> carsList = (List<Cars>)getIntent().getSerializableExtra("list");

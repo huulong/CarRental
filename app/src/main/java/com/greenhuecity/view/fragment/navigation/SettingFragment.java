@@ -101,6 +101,7 @@ public class SettingFragment extends Fragment implements SettingContract.IView {
             public void onClick(View v) {
                 SharedPreferences.Editor preferences = getActivity().getSharedPreferences("Success", Context.MODE_PRIVATE).edit();
                 preferences.remove("users");
+                preferences.apply();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });

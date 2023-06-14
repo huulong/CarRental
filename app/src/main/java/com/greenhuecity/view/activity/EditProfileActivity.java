@@ -44,7 +44,8 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
     Bitmap FixBitmap;
     ByteArrayOutputStream byteArrayOutputStream;
     byte[] byteArray;
-    String convertImage, userName, phone, email, cccd, age, address;
+    String convertImage;
+    String userName, phone, email, cccd, age, address;
     int user_id;
     private int GALLERY = 1, CAMERA = 2;
     EditProfilePresenter mPresenter;
@@ -89,9 +90,12 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 address = edtAddress.getText().toString();
                 cccd = edtCCCD.getText().toString();
                 if (FixBitmap != null && FixBitmap.getWidth() > 0 && FixBitmap.getHeight() > 0) {
-                    FixBitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
+                    FixBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
                     byteArray = byteArrayOutputStream.toByteArray();
                     convertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                }else {
+                    convertImage = "";
                 }
                 mPresenter.updateProfileInformation(user_id, convertImage, userName, phone, email, address, age, cccd);
             }
@@ -189,10 +193,9 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
             if (users.getEmail() != null) edtEmail.setText(users.getEmail());
             if (users.getPhone() != null) edtPhone.setText(users.getPhone());
             if (users.getCccd() != null) edtCCCD.setText(users.getCccd());
-            if (users.getAge() != 0) edtCCCD.setText(users.getAge() + "");
+            if (users.getAge() != 0) edtAge.setText(users.getAge() + "");
             if (users.getPhoto() != null) {
                 Glide.with(this).load(users.getPhoto()).into(showSelectedImage);
-                convertImage = users.getPhoto();
             }
         }
     }
@@ -202,10 +205,6 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
         onBackPressed();
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(this, ProfileActivity.class));
-    }
 
     @Override
     public void updateFailed(String mess) {

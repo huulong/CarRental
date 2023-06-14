@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -103,36 +104,40 @@ public class UploadCarPresenter implements UploadCarContract.IPresenter {
     }
 
     @Override
-    public void uploadCar(String car_name, double price, String description, String license_plates, String status, String from_time, String end_time, String approve, int power_id, int brand_id, int user_id, int distributor_id, double top_speed, double horse_power, double mileage, String image_data, String random_photo) {
+    public void uploadCar(String car_name, String price, String description, String license_plates, String status, String from_time, String end_time, String approve,
+                          int power_id, int brand_id, int user_id, int distributor_id, String top_speed, String horse_power, String mileage, String image_data, String random_photo) {
         progressDialog = ProgressDialog.show(context, "Upload Image", "Please wait...", false, false);
-        apiService.uploadCars(car_name, price, description, license_plates, status, from_time, end_time, approve, power_id, brand_id, user_id, distributor_id, top_speed, horse_power, mileage, image_data, random_photo).enqueue(new Callback<Cars>() {
-            @Override
-            public void onResponse(Call<Cars> call, Response<Cars> response) {
-                progressDialog.dismiss();
-                success();
-            }
+        if (car_name.isEmpty() || price.isEmpty() || description.isEmpty() || license_plates.isEmpty() || status.isEmpty() || from_time.isEmpty() ||
+                end_time.isEmpty() || power_id == 0 || brand_id == 0 || user_id == 0 || distributor_id == 0 || top_speed.isEmpty() ||
+                horse_power.isEmpty() || mileage.isEmpty() || image_data == null || image_data.isEmpty()) {
+            progressDialog.dismiss();
+            mView.notifiUploadFailed("Không được để trống!");
+        } else if (!TextUtils.isDigitsOnly(price) || !TextUtils.isDigitsOnly(top_speed) || !TextUtils.isDigitsOnly(horse_power) || !TextUtils.isDigitsOnly(mileage)) {
+            progressDialog.dismiss();
+            mView.notifiUploadFailed("Định dạng không đúng!");
+        } else {
+            double mPrice = Double.parseDouble(price);
+            double mTopSpeed = Double.parseDouble(top_speed);
+            double mHorsePower = Double.parseDouble(horse_power);
+            double mMileage = Double.parseDouble(mileage);
+            apiService.uploadCars(car_name, mPrice, description, license_plates, status, from_time, end_time,
+                    approve, power_id, brand_id, user_id, distributor_id, mTopSpeed, mHorsePower,
+                    mMileage, image_data, random_photo).enqueue(new Callback<Cars>() {
+                @Override
+                public void onResponse(Call<Cars> call, Response<Cars> response) {
+                    progressDialog.dismiss();
+                    mView.notifiSuccess();
+                }
 
-            @Override
-            public void onFailure(Call<Cars> call, Throwable t) {
-                progressDialog.dismiss();
-                success();
-            }
-        });
+                @Override
+                public void onFailure(Call<Cars> call, Throwable t) {
+                    progressDialog.dismiss();
+                    mView.notifiSuccess();
+                }
+            });
+        }
     }
-    private void success(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Thông báo");
-        builder.setMessage("Cho thuê thành công! Chờ nhà phân phối xác nhận");
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-                context.startActivity(new Intent(context, LeaseActivity.class));
-            }
-        }, 4000);
-    }
+
     @Override
     public int getUsersId() {
         SharedPreferences preferences = context.getSharedPreferences("Success", Context.MODE_PRIVATE);

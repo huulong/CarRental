@@ -3,6 +3,7 @@ package com.greenhuecity.data.remote;
 import com.greenhuecity.data.model.Brands;
 import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.model.Distributors;
+import com.greenhuecity.data.model.LeaseCar;
 import com.greenhuecity.data.model.OrderItems;
 import com.greenhuecity.data.model.OrderManagement;
 import com.greenhuecity.data.model.Orders;
@@ -116,11 +117,10 @@ public interface ApiService {
     Call<String> updateCensored(@Field("car_id") String car_id,
                                 @Field("approve") String approve);
 
-    //order of user
     @POST("arr-orderby-user-id.php")
     @FormUrlEncoded
-    Call<List<UserOrder>> getOrderByUserId(@Field("id") int id);
-
+    Call<List<UserOrder>> getOrderByUserIdStatus(@Field("id") int id,
+                                                 @Field("stt") String stt);
     //profile
     @POST("update-users.php")
     @FormUrlEncoded
@@ -135,5 +135,8 @@ public interface ApiService {
     @POST("get-user-by-id.php")
     @FormUrlEncoded
     Call<List<Users>> getUsersById(@Field("id") int id);
-
+    //
+    @POST("arr-lease-cars.php")
+    @FormUrlEncoded
+    Call<List<LeaseCar>> getLeaseCar(@Field("id") int id);
 }

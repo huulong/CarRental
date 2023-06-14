@@ -104,7 +104,7 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
 
     private void eventClickButton(ViewHolder holder, OrderManagement orderManagement) {
         String status = orderManagement.getStatus();
-        if (status.equals("Đã hoàn thành") || status.equals("Bị hủy từ khách hàng") || status.equals("Bị hủy từ nhà phân phối") || status.equals("Bị hủy do không nhận xe")) {
+        if (status.equals("Đã hoàn thành") || status.equals("Bị hủy")) {
             holder.tvComplete.setVisibility(View.VISIBLE);
             holder.tvComplete.setText(status.equals("Đã hoàn thành") ? "Complete" : "Bị hủy");
             holder.btnConfirm.setVisibility(View.GONE);

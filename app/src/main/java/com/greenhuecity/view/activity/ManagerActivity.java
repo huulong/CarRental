@@ -31,12 +31,6 @@ public class ManagerActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("current",3);
-        startActivity(intent);
-    }
 
     void eventButton() {
         btnOrder.setOnClickListener(view -> startActivity(new Intent(this, OrderManagementActivity.class)));
