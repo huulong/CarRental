@@ -2,6 +2,7 @@ package com.greenhuecity.data.presenter;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -28,8 +29,10 @@ import com.greenhuecity.data.model.Users;
 import com.greenhuecity.data.remote.ApiService;
 import com.greenhuecity.data.remote.RetrofitClient;
 import com.greenhuecity.view.activity.MainActivity;
+import com.greenhuecity.view.activity.SearchActivity;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -41,10 +44,12 @@ import retrofit2.Response;
 public class HomePresenter implements HomeContract.IPresenter {
     HomeContract.IView mView;
     ApiService apiService;
+    Context context;
 
-    public HomePresenter(HomeContract.IView mView) {
+    public HomePresenter(HomeContract.IView mView,Context context) {
         this.mView = mView;
         apiService = RetrofitClient.getClient().create(ApiService.class);
+        this.context = context;
     }
 
     @Override
@@ -63,17 +68,7 @@ public class HomePresenter implements HomeContract.IPresenter {
         });
     }
 
-    @Override
-    public List<Cars> filterCarList(String searchText, List<Cars> carsList) {
-        List<Cars> filteredList = new ArrayList<>();
-        for (Cars car : carsList) {
-            if (car.getCar_name().toLowerCase().contains(searchText)
-                    || car.getBrand_name().toLowerCase().contains(searchText)) {
-                filteredList.add(car);
-            }
-        }
-        return filteredList;
-    }
+
 
     @Override
     public void getUserLocation(MainActivity activity) {
@@ -125,6 +120,24 @@ public class HomePresenter implements HomeContract.IPresenter {
             Gson gson = new Gson();
             Users users = gson.fromJson(key, Users.class);
             mView.setImgUser(users.getPhoto());
+        }
+    }
+
+    @Override
+    public void searchProcessing(List<Cars> carsList, String inputText) {
+        List<Cars> filteredList = new ArrayList<>();
+        for (Cars car : carsList) {
+            if (car.getCar_name().toLowerCase().contains(inputText)
+                    || car.getBrand_name().toLowerCase().contains(inputText)) {
+                filteredList.add(car);
+            }
+        }
+        if (filteredList != null && inputText != null && !inputText.isEmpty()) {
+            Intent intent = new Intent(context, SearchActivity.class);
+            intent.putExtra("list", (Serializable) filteredList);
+            context.startActivity(new Intent(intent));
+        }else{
+            mView.notifiEmptyText();
         }
     }
 }

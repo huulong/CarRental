@@ -82,11 +82,7 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
                 holder.tvComplete.setVisibility(View.VISIBLE);
                 holder.tvComplete.setText("Đã thuê");
                 break;
-            case "Bị hủy từ khách hàng":
-                holder.tvComplete.setVisibility(View.VISIBLE);
-                holder.tvComplete.setText("Bị hủy");
-                break;
-            case "Bị hủy từ nhà phân phối":
+            case "Bị hủy":
                 holder.tvComplete.setVisibility(View.VISIBLE);
                 holder.tvComplete.setText("Bị hủy");
                 break;

@@ -44,13 +44,6 @@ public class ProfileActivity extends AppCompatActivity implements ProfileContrac
     }
 
     @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("current",3);
-        startActivity(intent);
-    }
-
-    @Override
     public void setDataProfile(Users users) {
         if (users != null) {
             if (users.getFullname() != null) tvUserName.setText(users.getFullname());
@@ -59,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileContrac
             if (users.getPhone() != null) tvPhone.setText(users.getPhone());
             if (users.getCccd() != null) tvCCCD.setText(users.getCccd());
             if (users.getPhoto() != null) Glide.with(this).load(users.getPhoto()).into(imgUser);
+
         }
     }
 }

@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RentCarActivity extends AppCompatActivity implements OnMapReadyCallback, RentCarConstract.IView {
     TextView tvName, tvBrand, tvDeparture_day, tvReturn_day, tvDistance, tvLocation, tvPay, tvDistributors, textView_priceDetail, tvStartTimeCar, tvEndTimeEnd;
-    ImageView imgCalendarStar, imgCalendarEnd;
+    ImageView imgCalendarStar, imgCalendarEnd, imgBack;
     CircleImageView igDistributors;
     LinearLayout layoutPay;
     double latitude, longitude, price;
@@ -93,6 +93,8 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
         textView_priceDetail = findViewById(R.id.textView_priceDetail);
         tvStartTimeCar = findViewById(R.id.textView_timeRentStart);
         tvEndTimeEnd = findViewById(R.id.textView_timeRentEnd);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
         //khởi tạo các Calendar
 
     }
@@ -209,6 +211,7 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void run() {
                 dialog.dismiss();
+                onBackPressed();
             }
         }, 2000);
     }

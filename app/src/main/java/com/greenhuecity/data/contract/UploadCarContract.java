@@ -28,13 +28,15 @@ public interface UploadCarContract {
         void setDataPowerList(List<Powers> mList);
         void setDataStatusList(List<String> mList);
         void notifiError(String mess);
+        void notifiSuccess();
+        void notifiUploadFailed(String mess);
     }
 
     interface IPresenter {
         void getDataList();
 
         void uploadCar(String car_name,
-                       double price,
+                       String price,
                        String description,
                        String license_plates,
                        String status,
@@ -45,9 +47,9 @@ public interface UploadCarContract {
                        int brand_id,
                        int user_id,
                        int distributor_id,
-                       double top_speed,
-                       double horse_power,
-                       double mileage,
+                       String top_speed,
+                       String horse_power,
+                       String mileage,
                        String image_data,
                        String random_photo);
         int getUsersId();

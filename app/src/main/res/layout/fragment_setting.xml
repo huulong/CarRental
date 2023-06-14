@@ -15,7 +15,7 @@
 
         <TextView
             style="@style/viewParent.headerText"
-            android:text="Settings" />
+            android:text="Cài đặt" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -60,23 +60,23 @@
             android:id="@+id/darkModeSwitch"
             style="@style/settingsText"
             android:drawableLeft="@drawable/ic_dark_mode"
-            android:text="Dark Mode" />
+            android:text="Chế độ tối" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Profile" />
+            android:text="Hồ sơ" />
 
         <TextView
             android:id="@+id/textView_editProfile"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_edit_profile"
-            android:text="Edit Profile" />
+            android:text="Chỉnh sửa hồ sơ" />
 
         <TextView
             style="@style/viewParent.headerText.settingsTextIcon"
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_edit_password"
-            android:text="Change Password" />
+            android:text="Đổi mật khẩu" />
         <TextView
             android:id="@+id/textView_motorbike.rental"
             style="@style/viewParent.headerText.settingsTextIcon"
@@ -86,17 +86,17 @@
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Notifications" />
+            android:text="Thông báo" />
 
         <Switch
             style="@style/settingsText"
             android:checked="true"
             android:drawableLeft="@drawable/ic_notifications"
-            android:text="Notifications" />
+            android:text="Thông báo" />
 
         <TextView
             style="@style/viewParent.headerText.settingsMiniTitle"
-            android:text="Regional" />
+            android:text="Quản lý" />
         <TextView
             android:id="@+id/textView_order"
             style="@style/viewParent.headerText.settingsTextIcon"
@@ -107,19 +107,19 @@
             android:id="@+id/textView_manager"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/analytics"
-            android:text="Quản lý của nhà phân phối"
+            android:text="Nhà phân phối"
             android:visibility="visible"/>
 
         <TextView
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_languages"
-            android:text="Language" />
+            android:text="Ngôn ngữ" />
 
         <TextView
             android:id="@+id/textView_logout"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_logout"
-            android:text="Logout" />
+            android:text="Đăng xuất" />
 
     </LinearLayout>
 </ScrollView>

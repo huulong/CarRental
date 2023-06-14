@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class CarDetailActivity extends AppCompatActivity implements CarDetailContract.IView {
-    ImageView img, img_heart;
+    ImageView img, img_heart,imgBack;
     CircleImageView imgDistributors;
     TextView tvName, tvTopSpeed, tvHoursPower, tvMileage, tvDescription, tvPrice, tvDistributors,tvTimeStart,tvTimeEnd,tvStatus;
     LinearLayout btnBooking;
@@ -70,6 +70,7 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
         });
     }
 
+
     private void initGUI() {
         img = findViewById(R.id.img_detail_car);
         img_heart = findViewById(R.id.img_heart);
@@ -85,6 +86,8 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
         tvTimeEnd = findViewById(R.id.textView_timeRentEnd);
         tvTimeStart = findViewById(R.id.textView_timeRentStart);
         tvStatus = findViewById(R.id.status);
+        imgBack = findViewById(R.id.img_back);
+        imgBack.setOnClickListener(view->onBackPressed());
     }
 
     @Override

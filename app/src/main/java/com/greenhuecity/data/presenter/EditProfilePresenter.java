@@ -29,6 +29,7 @@ public class EditProfilePresenter implements EditProfileContract.IPresenter {
     ApiService apiService;
     ProgressDialog progressDialog;
 
+
     public EditProfilePresenter(EditProfileContract.IView mView, Context context) {
         this.mView = mView;
         this.context = context;
@@ -52,35 +53,31 @@ public class EditProfilePresenter implements EditProfileContract.IPresenter {
             mView.updateFailed("Vui lòng nhập thông tin cần thiết");
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || !Patterns.PHONE.matcher(phone).matches()) {
             mView.updateFailed("Thông tin không hợp lệ!");
-        } else if ((!age.isEmpty() || !cccd.isEmpty()) && (!TextUtils.isDigitsOnly(age) || !TextUtils.isDigitsOnly(cccd) || cccd.length() != 12)) {
-            mView.updateFailed("Định dạng không hợp lệ!");
-        } else {
+        } else if (!age.isEmpty() && !TextUtils.isDigitsOnly(age)) {
+            mView.updateFailed("Tuổi không đúng!");
+        }else if(!cccd.isEmpty() && (!TextUtils.isDigitsOnly(cccd) || cccd.length() != 12)){
+            mView.updateFailed("Số CCCD không đúng chuẩn!");
+        }else {
             progressDialog = ProgressDialog.show(context, "Loading...", "Please wait .....", false, false);
             apiService.updateUser(id, photo, fullname, email, phone, age, cccd, address).enqueue(new Callback<Users>() {
                 @Override
                 public void onResponse(Call<Users> call, Response<Users> response) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            mView.updateSuccess();
-
-                        }
-                    }, 2000);
-                    reGetListUser(id);
                 }
-
                 @Override
                 public void onFailure(Call<Users> call, Throwable t) {
-                    Log.e("TAG", "onFailure: " + t.getMessage());
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.dismiss();
-                            mView.updateSuccess();
+                            reGetListUser(id);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.dismiss();
+                                    mView.updateSuccess();
+                                }
+                            }, 2000);
                         }
-                    }, 2000);
-                    reGetListUser(id);
+                    }, 1000);
 
                 }
             });

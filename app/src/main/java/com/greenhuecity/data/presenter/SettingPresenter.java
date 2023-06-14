@@ -42,7 +42,7 @@ public class SettingPresenter implements SettingContract.IPresenter {
     public boolean isLogged() {
         SharedPreferences preferences = context.getSharedPreferences("Success", Context.MODE_PRIVATE);
         String key = preferences.getString("users", "");
-        if (!key.isEmpty()) {
+        if (!key.isEmpty() && key != null) {
             return  true;
         }
         return false;

@@ -1,6 +1,7 @@
 package com.greenhuecity.view.fragment.navigation;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -93,7 +94,7 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
             }
         }).attach();
         viewPager2.setUserInputEnabled(false);
-        mPresenter = new HomePresenter(this);
+        mPresenter = new HomePresenter(this,getActivity());
         mPresenter.getCarList();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -152,14 +153,17 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
     }
 
 
+
+
     @Override
-    public void searchTextChangedListener(List<Cars> carsList) {
+    public void getCarsList(List<Cars> carsList) {
+        this.carsList = carsList;
         completeTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
                         || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
-                    intentSearch(carsList);
+                    mPresenter.searchProcessing(carsList,textSearch);
                     return true;
                 }
                 return false;
@@ -168,15 +172,9 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentSearch(carsList);
+                mPresenter.searchProcessing(carsList,textSearch);
             }
         });
-    }
-
-    @Override
-    public void getCarsList(List<Cars> carsList) {
-        this.carsList = carsList;
-        if (carsList != null && textSearch != null) searchTextChangedListener(carsList);
 
     }
 
@@ -190,12 +188,19 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
         if (url != null) Glide.with(getActivity()).load(url).into(imgUser);
     }
 
-    void intentSearch(List<Cars> carsList) {
-        List<Cars> searchList = mPresenter.filterCarList(textSearch, carsList);
-        if (searchList != null) {
-            Intent intent = new Intent(requireContext(), SearchActivity.class);
-            intent.putExtra("list", (Serializable) searchList);
-            startActivity(new Intent(intent));
-        }
+    @Override
+    public void notifiEmptyText() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Lỗi");
+        builder.setMessage("Không được để trống");
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 2000);
     }
+
 }

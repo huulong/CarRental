@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@drawable/img_1"
-        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -26,11 +25,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="8dp">
+             >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp">
 
                     <ImageView
                         android:id="@+id/img_back"
