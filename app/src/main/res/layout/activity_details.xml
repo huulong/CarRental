@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
-                        android:text="Thời gian:"
+                        android:text="Thời gian cho thuê:"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
                   <RelativeLayout
@@ -179,29 +179,19 @@
                           android:layout_height="wrap_content"
                           android:gravity="center_vertical"
                           android:text="2023-06-07 12:23:12"
-                          android:paddingLeft="10dp"
-                          android:textColor="#F10629"
-                          android:textSize="15sp" />
-                      <TextView
-                          android:id="@+id/text"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:gravity="center_vertical"
-                          android:text=" - "
 
-                          android:layout_below="@+id/textView_timeRentStart"
-                          android:textColor="@color/black"
+                          android:textColor="#FF9800"
                           android:textSize="15sp" />
+
                       <TextView
                           android:id="@+id/textView_timeRentEnd"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:gravity="center_vertical"
                           android:text="2023-06-07 12:23:12"
-                          android:textColor="#DA0707"
+                          android:textColor="#FF9800"
                           android:textSize="15sp"
 
-                          android:layout_toRightOf="@+id/text"
                           android:layout_below="@id/textView_timeRentStart"/>
                   </RelativeLayout>
                 </LinearLayout>
@@ -300,10 +290,10 @@
                     android:id="@+id/layout_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
-                        android:layout_width="110dp"
+                        android:layout_width="105dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_properties"
                         android:orientation="vertical"
@@ -340,7 +330,7 @@
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
-                        android:layout_width="110dp"
+                        android:layout_width="105dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_properties"
 
@@ -376,7 +366,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="110dp"
+                        android:layout_width="105dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/background_properties"
