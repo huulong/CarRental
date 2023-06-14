@@ -73,6 +73,7 @@
             android:text="Chỉnh sửa hồ sơ" />
 
         <TextView
+            android:id="@+id/textView_editproflie"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_edit_password"

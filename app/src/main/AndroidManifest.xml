@@ -19,12 +19,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".util.SplashScreen"
+            android:name=".view.activity.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -40,7 +40,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBGG0rldiCyzp45Pu_XBEHExPrpWfpBUQ0" />
+            android:value="AIzaSyDc7PnOq3Hxzq6dxeUVaY8WGLHIePl0swY" />
 
         <activity
             android:name=".view.activity.MainActivity"
