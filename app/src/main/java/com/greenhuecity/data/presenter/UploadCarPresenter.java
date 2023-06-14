@@ -54,9 +54,9 @@ public class UploadCarPresenter implements UploadCarContract.IPresenter {
     public void getDataList() {
         List<String> statusList = new ArrayList<>();
         statusList.add("Đang rảnh");
-        statusList.add("Đang bận");
         statusList.add("Xe đang được thuê");
-        statusList.add("Xe bị hỏng");
+        statusList.add("Tạm ngừng cho thuê");
+        statusList.add("Xe đang bảo dưỡng");
         //Status
         mView.setDataStatusList(statusList);
 

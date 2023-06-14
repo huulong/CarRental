@@ -18,10 +18,12 @@ import com.greenhuecity.R;
 import com.greenhuecity.data.contract.SettingContract;
 import com.greenhuecity.data.model.Distributors;
 import com.greenhuecity.data.presenter.SettingPresenter;
+import com.greenhuecity.view.activity.EditProfileActivity;
 import com.greenhuecity.view.activity.LeaseActivity;
 import com.greenhuecity.view.activity.LoginActivity;
 import com.greenhuecity.view.activity.ManagerActivity;
 import com.greenhuecity.view.activity.OrderManagementActivity;
+import com.greenhuecity.view.activity.ProfileActivity;
 import com.greenhuecity.view.activity.UploadCarsActivity;
 import com.greenhuecity.view.activity.UserOrderActivity;
 
@@ -31,7 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingFragment extends Fragment implements SettingContract.IView {
     CircleImageView civProfile;
-    TextView tvNameProfile, tvManager, tvCarRental, tvOrder, tvLogout;
+    TextView tvNameProfile, tvManager, tvCarRental, tvOrder, tvLogout, tvEditPf, tvEditPf1;
     View view;
     SettingPresenter mPresenter;
 
@@ -47,6 +49,11 @@ public class SettingFragment extends Fragment implements SettingContract.IView {
             tvManager.setOnClickListener(view -> startActivity(new Intent(getActivity(), ManagerActivity.class)));
             tvOrder.setOnClickListener(view -> startActivity(new Intent(getActivity(), UserOrderActivity.class)));
             tvCarRental.setOnClickListener(view -> startActivity(new Intent(getActivity(), LeaseActivity.class)));
+            tvNameProfile.setOnClickListener(view -> startActivity(new Intent(getActivity(), ProfileActivity.class)));
+            tvEditPf.setOnClickListener(view -> startActivity(new Intent(getActivity(), EditProfileActivity.class)));
+            tvEditPf1.setOnClickListener(view -> startActivity(new Intent(getActivity(), EditProfileActivity.class)));
+            civProfile.setOnClickListener(view -> startActivity(new Intent(getActivity(), ProfileActivity.class)));
+
         } else
             tvNameProfile.setOnClickListener(view -> startActivity(new Intent(getActivity(), LoginActivity.class)));
         eventLogout();
@@ -61,6 +68,8 @@ public class SettingFragment extends Fragment implements SettingContract.IView {
         tvCarRental = view.findViewById(R.id.textView_motorbike_rental);
         tvOrder = view.findViewById(R.id.textView_order);
         tvLogout = view.findViewById(R.id.textView_logout);
+        tvEditPf = view.findViewById(R.id.textView_editProfile);
+        tvEditPf1 = view.findViewById(R.id.textView_editProfile2);
     }
 
     @Override
@@ -90,9 +99,9 @@ public class SettingFragment extends Fragment implements SettingContract.IView {
         tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    SharedPreferences.Editor preferences = getActivity().getSharedPreferences("Success", Context.MODE_PRIVATE).edit();
-                    preferences.remove("users");
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                SharedPreferences.Editor preferences = getActivity().getSharedPreferences("Success", Context.MODE_PRIVATE).edit();
+                preferences.remove("users");
+                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
     }

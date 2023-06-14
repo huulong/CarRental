@@ -22,7 +22,7 @@ public interface FavoriteContract {
         void getCarList();
         void getCarListAPI();
         List<Cars> filterCarList(String searchText,List<Cars> carsList);
-        void getUserLocation(LocationManager locationManager);
+        void getUserLocation();
         void getImgUserFromShared();
     }
 }

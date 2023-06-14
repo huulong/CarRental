@@ -40,6 +40,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/textView_editProfile2"
                 style="@style/viewParent.headerText"
                 android:layout_below="@id/usernameTextView"
                 android:layout_toRightOf="@id/profileCircleImageView"
@@ -66,6 +67,7 @@
             android:text="Profile" />
 
         <TextView
+            android:id="@+id/textView_editProfile"
             style="@style/viewParent.headerText.settingsTextIcon"
             android:drawableLeft="@drawable/ic_edit_profile"
             android:text="Edit Profile" />
