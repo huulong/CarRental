@@ -52,49 +52,74 @@
         android:textColor="#2487FF"
         android:textSize="26sp"
         android:textStyle="bold" />
-    <EditText
-        android:id="@+id/textUser"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/background_properties"
-        android:drawableStart="@drawable/icon_user"
-        android:drawablePadding="10dp"
-        android:hint="Email hoặc số điện thoại"
-        android:maxLines="1"
-        android:lines="1"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        />
+<!--    <EditText-->
+<!--        android:id="@+id/textUser"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="@drawable/background_properties"-->
+<!--        android:drawableStart="@drawable/icon_user"-->
+<!--        android:drawablePadding="10dp"-->
+<!--        android:hint="Email hoặc số điện thoại"-->
+<!--        android:maxLines="1"-->
+<!--        android:lines="1"-->
+<!--        android:paddingStart="15dp"-->
+<!--        android:paddingEnd="15dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:imeOptions="actionNext"-->
+<!--        android:inputType="text"-->
+<!--        />-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        app:boxStrokeWidth="0dp"
-        app:passwordToggleEnabled="true"
-        app:hintEnabled="false">
-        <EditText
-            android:id="@+id/text_Pass"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_properties"
-            android:drawableStart="@drawable/icon_pass"
-            android:drawablePadding="15dp"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:lines="1"
-            android:paddingEnd="15dp"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/cardview_dark_background"
-            android:imeOptions="actionDone"
-           />
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/icon_user">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textUser"            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email hoặc số điện thoại" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        app:boxStrokeWidth="0dp"-->
+<!--        app:passwordToggleEnabled="true"-->
+<!--        app:hintEnabled="false">-->
+<!--        <EditText-->
+<!--            android:id="@+id/text_Pass"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/background_properties"-->
+<!--            android:drawableStart="@drawable/icon_pass"-->
+<!--            android:drawablePadding="15dp"-->
+<!--            android:hint="Mật khẩu"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:maxLines="1"-->
+<!--            android:paddingStart="15dp"-->
+<!--            android:lines="1"-->
+<!--            android:paddingEnd="15dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHighlight="@color/cardview_dark_background"-->
+<!--            android:imeOptions="actionDone"-->
+<!--           />-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/icon_pass"
+        app:counterMaxLength="32"
+        app:passwordToggleEnabled="true"
+        app:counterEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_Pass"
+            android:maxLength="32"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <TextView
         android:id="@+id/text_ForgotPassword"
