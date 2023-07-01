@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:id="@+id/layout_vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Button
+                android:id="@+id/btnPrev"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="5dp"
+                android:visibility="invisible"
+                android:background="@drawable/ic_arrow"
+                app:backgroundTint="#fff"
+
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:cardCornerRadius="5dp"
+                android:layout_toRightOf="@+id/btnPrev"
+                android:layout_toLeftOf="@id/btnNext"
+                app:cardElevation="0dp">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager_Popup"
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:background="#fff"
+
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_arrow"
+                android:rotation="180"
+                app:backgroundTint="#fff" />
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/layout_vp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#fff"
+            app:cardCornerRadius="9999dp"
+            app:cardElevation="0dp">
+
+            <Button
+                android:id="@+id/btnClose"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:drawable/ic_menu_close_clear_cancel"
+                app:backgroundTint="#1B4AF4"
+
+                />
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+</RelativeLayout>

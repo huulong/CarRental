@@ -82,7 +82,6 @@ public class CarDetailPresenter implements CarDetailContract.IPresenter {
         if (!key.isEmpty()) {
            return  true;
         }
-        mView.notloggedIn("Bạn cần đăng nhập trước khi thuê xe.");
         return false;
     }
 }

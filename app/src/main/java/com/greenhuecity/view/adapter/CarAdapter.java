@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.greenhuecity.R;
 import com.greenhuecity.data.model.Cars;
+import com.greenhuecity.util.NetworkUtils;
 import com.greenhuecity.view.activity.CarDetailActivity;
 
 import java.text.NumberFormat;
@@ -50,9 +52,11 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
         holder.imgCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CarDetailActivity.class);
-                intent.putExtra("car", car);
-                mContext.startActivity(intent);
+               if(NetworkUtils.isInternetAvailable(mContext)){
+                   Intent intent = new Intent(mContext, CarDetailActivity.class);
+                   intent.putExtra("car", car);
+                   mContext.startActivity(intent);
+               }else Toast.makeText(mContext, "Lỗi mạng!", Toast.LENGTH_SHORT).show();
             }
         });
 

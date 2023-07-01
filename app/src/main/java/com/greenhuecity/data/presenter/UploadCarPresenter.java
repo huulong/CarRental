@@ -8,8 +8,12 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -49,6 +53,19 @@ public class UploadCarPresenter implements UploadCarContract.IPresenter {
         this.mView = mView;
         this.context = context;
         apiService = RetrofitClient.getClient().create(ApiService.class);
+    }
+
+    @Override
+    public void boldText() {
+        String text = "Đã đọc chính sách và điều khoản sử dụng cho thuê của ứng dụng";
+
+        SpannableString spannableString = new SpannableString(text);
+        StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
+        int startIndex = text.indexOf("chính sách và điều khoản");
+        int endIndex = startIndex + "chính sách và điều khoản".length();
+        spannableString.setSpan(boldSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mView.setBoldTextCheckbox(spannableString);
+
     }
 
     @Override

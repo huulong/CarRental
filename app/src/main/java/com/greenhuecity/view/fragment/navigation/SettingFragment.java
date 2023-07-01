@@ -24,6 +24,8 @@ import com.greenhuecity.view.activity.LoginActivity;
 import com.greenhuecity.view.activity.ManagerActivity;
 import com.greenhuecity.view.activity.OrderManagementActivity;
 import com.greenhuecity.view.activity.ProfileActivity;
+import com.greenhuecity.view.activity.SupportActivity;
+import com.greenhuecity.view.activity.TutorialRentActivity;
 import com.greenhuecity.view.activity.UploadCarsActivity;
 import com.greenhuecity.view.activity.UserOrderActivity;
 
@@ -33,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingFragment extends Fragment implements SettingContract.IView {
     CircleImageView civProfile;
-    TextView tvNameProfile, tvManager, tvCarRental, tvOrder, tvLogout, tvEditPf, tvEditPf1;
+    TextView tvNameProfile, tvManager, tvCarRental, tvOrder, tvLogout, tvEditPf, tvEditPf1,tvTutorial,tvSupport;
     View view;
     SettingPresenter mPresenter;
 
@@ -56,6 +58,8 @@ public class SettingFragment extends Fragment implements SettingContract.IView {
 
         } else
             tvNameProfile.setOnClickListener(view -> startActivity(new Intent(getActivity(), LoginActivity.class)));
+        tvSupport.setOnClickListener(view->startActivity(new Intent(getActivity(), SupportActivity.class)));
+        tvTutorial.setOnClickListener(view->startActivity(new Intent(getActivity(), TutorialRentActivity.class)));
         eventLogout();
         return view;
     }
@@ -70,6 +74,8 @@ public class SettingFragment extends Fragment implements SettingContract.IView {
         tvLogout = view.findViewById(R.id.textView_logout);
         tvEditPf = view.findViewById(R.id.textView_editProfile);
         tvEditPf1 = view.findViewById(R.id.textView_editProfile2);
+        tvTutorial = view.findViewById(R.id.textView_tutorialRent);
+        tvSupport = view.findViewById(R.id.textView_support);
     }
 
     @Override

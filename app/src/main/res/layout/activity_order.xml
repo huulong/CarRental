@@ -210,8 +210,9 @@
                             app:layout_constraintTop_toBottomOf="@+id/text">
 
                             <LinearLayout
-                                android:layout_width="190dp"
+                                android:layout_width="0dp"
                                 android:layout_height="80dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/background_properties"
                                 android:orientation="vertical"
                                 android:padding="5dp">
@@ -250,8 +251,9 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="190dp"
+                                android:layout_width="0dp"
                                 android:layout_height="80dp"
+                                android:layout_weight="1"
                                 android:background="@drawable/background_properties"
                                 android:orientation="vertical"
                                 android:layout_marginLeft="6dp"
@@ -317,17 +319,19 @@
                                 android:paddingLeft="15dp"
                                 android:paddingTop="10dp"
                                 android:paddingEnd="15dp"
+                                android:weightSum="4"
                                 android:paddingBottom="10dp">
 
                                 <TextView
                                     android:id="@+id/textView_pickup_location"
-                                    android:layout_width="290dp"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="3"
                                     android:layout_height="wrap_content"
                                     android:drawableStart="@drawable/location"
-                                    android:drawablePadding="3dp"
+                                    android:drawablePadding="5dp"
                                     android:drawableTint="@color/gray"
                                     android:gravity="center_vertical"
-                                    android:text="Hai Bà Trưng, tp Huế"
+                                    android:text="Hai Bà Trưng, tp Huế , Thừa Thiên Huế"
                                     android:textColor="@color/black"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
@@ -337,10 +341,11 @@
 
                                 <TextView
                                     android:id="@+id/textView_distance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center_vertical"
-                                    android:text="0.5 km"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:text="0 km"
                                     android:textColor="@color/gray"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"

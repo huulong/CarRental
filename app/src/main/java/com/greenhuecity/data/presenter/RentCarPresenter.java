@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
@@ -29,11 +30,13 @@ import com.google.gson.Gson;
 
 import com.greenhuecity.data.contract.RentCarConstract;
 import com.greenhuecity.data.model.CarDistributor;
+import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.model.OrderItems;
 import com.greenhuecity.data.model.Orders;
 import com.greenhuecity.data.model.Users;
 import com.greenhuecity.data.remote.ApiService;
 import com.greenhuecity.data.remote.RetrofitClient;
+import com.greenhuecity.util.NetworkUtils;
 import com.greenhuecity.view.activity.RentCarActivity;
 
 import java.io.IOException;
@@ -41,11 +44,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,27 +81,27 @@ public class RentCarPresenter implements RentCarConstract.IPresenter {
 
     @Override
     public void onMapReady(GoogleMap googleMap, CarDistributor carDistributor) {
+        LatLng destination = new LatLng(carDistributor.getDistributors().getLatitude(), carDistributor.getDistributors().getLongitude());
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 13));
+        Marker marker = googleMap.addMarker(new MarkerOptions()
+                .position(destination)
+                .title(carDistributor.getDistributors().getName())
+                .snippet(carDistributor.getDistributors().getAddress()));
+
+        // Hiển thị InfoWindow khi click vào Marker
+        marker.showInfoWindow();
+
         if (ActivityCompat.checkSelfPermission(rentCarActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true);
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (lastKnownLocation != null) {
+//                Lấy vị trí người dùng
                 LatLng origin = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-                LatLng destination = new LatLng(carDistributor.getDistributors().getLatitude(), carDistributor.getDistributors().getLongitude());
-
-                //Hiển thị vị trí nhà phân phối trên map
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 13));
-                Marker marker = googleMap.addMarker(new MarkerOptions()
-                        .position(destination)
-                        .title(carDistributor.getDistributors().getName())
-                        .snippet(carDistributor.getDistributors().getAddress()));
-
-                // Hiển thị InfoWindow khi click vào Marker
-                marker.showInfoWindow();
-                //khoảng cách
+                //Tính khoảng cách đến lấy xe
                 mView.setDistance(distanceToDistributor(origin, destination));
-                //địa chỉ
+                //Lấy địa chỉ
                 getAddressFromLatLng(destination);
 
             }
@@ -113,6 +120,7 @@ public class RentCarPresenter implements RentCarConstract.IPresenter {
             if (addresses.size() > 0) {
                 Address address = addresses.get(0);
                 String locality = address.getLocality();
+
                 String country = address.getCountryName();
                 String addressLine = address.getAddressLine(0);
                 mView.setAddress(locality + ", " + country);
@@ -173,20 +181,25 @@ public class RentCarPresenter implements RentCarConstract.IPresenter {
                             mView.notifiErrorDate("Ngày giờ không hợp lệ");
                             return;
                         }
-                        long dateStart = (endDate.getTime() - chooseDate.getTime()) / (24 * 60 * 60 * 1000);
+//                        long dateStart = (endDate.getTime() - chooseDate.getTime()) / (24 * 60 * 60 * 1000);
+                        long dateStart = TimeUnit.DAYS.convert((endDate.getTime() - chooseDate.getTime()), TimeUnit.MILLISECONDS);
+
                         if (item == 0) {
-                            if (chooseDate.getTime() >= dateStartTimeCar.getTime() && chooseDate.getTime() < endDate.getTime() && dateStart >= 1 && dateStart <= 7) {
+                            if (chooseDate.getTime() >= dateStartTimeCar.getTime() && chooseDate.getTime() < endDate.getTime() && dateStart >= 1) {
                                 tv.setText(sdf.format(chooseDate));
                                 mView.setTotalRent((int) dateStart);
                             } else
-                                mView.notifiErrorDate("Ngày giờ thuê phải nhỏ hơn ngày trả 1 ngày, thuê không quá 1 tuần và phù hợp với ngày cho xe cho thuê");
+                                mView.notifiErrorDate("Ngày thuê không hợp lệ");
                         } else if (item == 1) {
-                            long dateEnd = (chooseDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000);
-                            if (chooseDate.getTime() <= dateEndTimeCar.getTime() && chooseDate.getTime() > startDate.getTime() && dateEnd >= 1 && dateEnd <= 7) {
+//                            long dateEnd = (chooseDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000);
+                            long dateEnd = TimeUnit.DAYS.convert((chooseDate.getTime() - startDate.getTime()), TimeUnit.MILLISECONDS);
+
+                            if (chooseDate.getTime() <= dateEndTimeCar.getTime() && chooseDate.getTime() > startDate.getTime() && dateEnd >= 1) {
                                 tv.setText(sdf.format(chooseDate));
                                 mView.setTotalRent((int) dateEnd);
-                            } else
-                                mView.notifiErrorDate("Ngày giờ trả phải lớn hơn ngày thuê 1 ngày, thuê không quá 1 tuần và phù hợp với ngày cho xe cho thuê");
+                            } else if (chooseDate.getTime() > dateEndTimeCar.getTime()) {
+                                mView.notifiErrorDate("Quá ngày được phép thuê");
+                            } else mView.notifiErrorDate("Ngày trả không hợp lệ");
                         }
 
 
@@ -230,6 +243,20 @@ public class RentCarPresenter implements RentCarConstract.IPresenter {
             return users.getId();
         }
         return 0;
+    }
+
+    @Override
+    public void updateStatusCars(int id) {
+        apiService.updateStatusCar(id,"Xe đang được thuê").enqueue(new Callback<Cars>() {
+            @Override
+            public void onResponse(Call<Cars> call, Response<Cars> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Cars> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -285,30 +312,37 @@ public class RentCarPresenter implements RentCarConstract.IPresenter {
             @Override
             public void run() {
                 if (!isCancelled) {
-                    upOrders(rndCode, from_time, end_time);
-                    progressDialog.dismiss();
-                    mView.successOrders("Quý khách vui lòng chờ chúng tôi xác nhận sau đó đến lấy xe!");
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            apiService.getOrders(rndCode).enqueue(new Callback<List<Orders>>() {
-                                @Override
-                                public void onResponse(Call<List<Orders>> call, Response<List<Orders>> response) {
-                                    List<Orders> ordersList = response.body();
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            upOrderItems(car_id, ordersList.get(0).getId(), price);
-                                        }
-                                    }, 2000);
-                                }
-                                @Override
-                                public void onFailure(Call<List<Orders>> call, Throwable t) {
-                                }
-                            });
+                    if (NetworkUtils.isInternetAvailable(rentCarActivity)) {
+                        updateStatusCars(car_id);
+                        upOrders(rndCode, from_time, end_time);
+                        progressDialog.dismiss();
+                        mView.successOrders("Quý khách vui lòng chờ chúng tôi xác nhận sau đó đến lấy xe!");
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                apiService.getOrders(rndCode).enqueue(new Callback<List<Orders>>() {
+                                    @Override
+                                    public void onResponse(Call<List<Orders>> call, Response<List<Orders>> response) {
+                                        List<Orders> ordersList = response.body();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                upOrderItems(car_id, ordersList.get(0).getId(), price);
+                                            }
+                                        }, 2000);
+                                    }
 
-                        }
-                    }, 2000);
+                                    @Override
+                                    public void onFailure(Call<List<Orders>> call, Throwable t) {
+                                    }
+                                });
+
+                            }
+                        }, 2000);
+                    } else {
+                        progressDialog.dismiss();
+                        mView.failedOrders("Lỗi mạng!");
+                    }
                 }
 
             }

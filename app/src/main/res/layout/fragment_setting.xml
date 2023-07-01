@@ -36,7 +36,7 @@
                 style="@style/viewParent.headerText"
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@id/profileCircleImageView"
-                android:text="Chưa đăng nhập"
+                android:text="Đăng nhập ngay"
                 android:textSize="18sp" />
 
             <TextView
@@ -100,20 +100,31 @@
         <TextView
             android:id="@+id/textView_order"
             style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/motorcycle"
+            android:drawableLeft="@drawable/order"
             android:text="Đơn hàng của bạn"
             android:visibility="visible"/>
         <TextView
             android:id="@+id/textView_manager"
             style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/analytics"
+            android:drawableLeft="@drawable/onboarding"
             android:text="Nhà phân phối"
             android:visibility="visible"/>
+        <TextView
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:text="Hỗ trợ" />
 
         <TextView
+            android:id="@+id/textView_tutorialRent"
             style="@style/viewParent.headerText.settingsTextIcon"
-            android:drawableLeft="@drawable/ic_languages"
-            android:text="Ngôn ngữ" />
+            android:drawableLeft="@drawable/online_interview"
+            android:text="Hướng dẫn thuê xe" />
+
+        <TextView
+            android:id="@+id/textView_support"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:drawableLeft="@drawable/technical_support"
+            android:text="Hỗ trợ" />
+
 
         <TextView
             android:id="@+id/textView_logout"

@@ -6,10 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.google.gson.Gson;
-import com.greenhuecity.data.contract.OrderManagementContract;
-
+import com.greenhuecity.data.contract.MnOrderFragmentContract;
+import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.model.OrderManagement;
-import com.greenhuecity.data.model.Orders;
 import com.greenhuecity.data.model.UpdateOrder;
 import com.greenhuecity.data.model.Users;
 import com.greenhuecity.data.remote.ApiService;
@@ -21,21 +20,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderManagementPresenter implements OrderManagementContract.IPresenter {
-    OrderManagementContract.IView mView;
+
+public class MnOrderFragmentPresenter implements MnOrderFragmentContract.IPresenter {
+    MnOrderFragmentContract.IView mView;
     ApiService apiService;
     ProgressDialog progressDialog;
     Context context;
 
-    public OrderManagementPresenter(OrderManagementContract.IView mView, Context context) {
+    public MnOrderFragmentPresenter(MnOrderFragmentContract.IView mView, Context context) {
         this.mView = mView;
         apiService = RetrofitClient.getClient().create(ApiService.class);
         this.context = context;
     }
 
+
     @Override
-    public void getOrderManagementList(int id) {
-        apiService.getOrderManagement(id).enqueue(new Callback<List<OrderManagement>>() {
+    public void getOrderManagementList(int id, String stt) {
+        apiService.getOrderManagement(id,stt).enqueue(new Callback<List<OrderManagement>>() {
             @Override
             public void onResponse(Call<List<OrderManagement>> call, Response<List<OrderManagement>> response) {
                 List<OrderManagement> managementList = response.body();
@@ -60,6 +61,8 @@ public class OrderManagementPresenter implements OrderManagementContract.IPresen
         }
         return 0;
     }
+
+
 
     @Override
     public void updateStatusOrder(int order_id, String order_status, int car_id, String car_status) {
@@ -86,3 +89,4 @@ public class OrderManagementPresenter implements OrderManagementContract.IPresen
         }, 2000);
     }
 }
+

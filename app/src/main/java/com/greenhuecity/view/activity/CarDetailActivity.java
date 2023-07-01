@@ -1,6 +1,7 @@
 package com.greenhuecity.view.activity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,9 +30,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class CarDetailActivity extends AppCompatActivity implements CarDetailContract.IView {
-    ImageView img, img_heart,imgBack;
+    ImageView img, img_heart, imgBack, imgPhone;
     CircleImageView imgDistributors;
-    TextView tvName, tvTopSpeed, tvHoursPower, tvMileage, tvDescription, tvPrice, tvDistributors,tvTimeStart,tvTimeEnd,tvStatus;
+    TextView tvName, tvTopSpeed, tvHoursPower, tvMileage, tvDescription, tvPrice, tvDistributors, tvTimeStart, tvTimeEnd, tvStatus;
     LinearLayout btnBooking;
     CarDetailPresenter mPresenter;
     Cars car = null;
@@ -55,21 +57,30 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
         else img_heart.setImageResource(R.drawable.heart);
         img_heart.setOnClickListener(view -> mPresenter.updateDataFavorite(car, img_heart));
 
+
         btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(  mPresenter.isLogged()){
-                   Intent intent = new Intent(CarDetailActivity.this, RentCarActivity.class);
-                   CarDistributor carDistributor = new CarDistributor(car, dist);
-                   if (car != null && dist != null) {
-                       intent.putExtra("cars-distributors", carDistributor);
-                       startActivity(intent);
-                   }
-               }
+                if (car.getStatus().equals("Đang rảnh")) {
+                    if (mPresenter.isLogged()) {
+                        Intent intent = new Intent(CarDetailActivity.this, RentCarActivity.class);
+                        CarDistributor carDistributor = new CarDistributor(car, dist);
+                        if (car != null && dist != null) {
+                            intent.putExtra("cars-distributors", carDistributor);
+                            startActivity(intent);
+                        }
+                    } else notloggedIn("Bạn cần đăng nhập để được thuê xe!");
+                } else
+                    Toast.makeText(CarDetailActivity.this, "Xin lỗi! " + car.getStatus(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (dist != null)
+            super.onBackPressed();
+    }
 
     private void initGUI() {
         img = findViewById(R.id.img_detail_car);
@@ -87,7 +98,7 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
         tvTimeStart = findViewById(R.id.textView_timeRentStart);
         tvStatus = findViewById(R.id.status);
         imgBack = findViewById(R.id.img_back);
-        imgBack.setOnClickListener(view->onBackPressed());
+        imgBack.setOnClickListener(view -> onBackPressed());
     }
 
     @Override
@@ -101,7 +112,7 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
         //
         Locale locale = new Locale("vi", "VN");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
-        String rent_price = currencyFormatter.format(car.getPrice()) + "/day";
+        String rent_price = currencyFormatter.format(car.getPrice()) + "/ngày";
         tvPrice.setText(rent_price);
         tvTimeStart.setText(String.valueOf(car.getFrom_time()));
         tvTimeEnd.setText(String.valueOf(car.getEnd_time()));
@@ -130,6 +141,12 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Chưa đăng nhập");
         builder.setMessage(mess);
+        builder.setNegativeButton("Đăng nhập ngay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+        });
         AlertDialog dialog = builder.create();
         dialog.show();
         new Handler().postDelayed(new Runnable() {
@@ -137,6 +154,6 @@ public class CarDetailActivity extends AppCompatActivity implements CarDetailCon
             public void run() {
                 dialog.dismiss();
             }
-        }, 2000);
+        }, 5000);
     }
 }

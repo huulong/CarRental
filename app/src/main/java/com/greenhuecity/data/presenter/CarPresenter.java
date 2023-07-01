@@ -63,7 +63,7 @@ public class CarPresenter implements CarContract.IPresenter {
                     }
                 }
                 layoutManager.smoothScrollToPosition(recyclerView, new RecyclerView.State(), nextPosition);
-                mHandler.postDelayed(this, 10000);
+                mHandler.postDelayed(this, 10000,10000);
             }
         };
         mHandler.postDelayed(mRunnable,10000);

@@ -2,6 +2,8 @@ package com.greenhuecity.data.contract;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -30,9 +32,11 @@ public interface UploadCarContract {
         void notifiError(String mess);
         void notifiSuccess();
         void notifiUploadFailed(String mess);
+        void setBoldTextCheckbox(SpannableString text);
     }
 
     interface IPresenter {
+        void boldText();
         void getDataList();
 
         void uploadCar(String car_name,

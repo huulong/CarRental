@@ -80,18 +80,19 @@
                     android:src="@drawable/img_car" />
 
             </LinearLayout>
+
             <TextView
                 android:id="@+id/status"
-                android:gravity="end"
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_marginRight="20dp"
-                android:text="Free time"
+                android:layout_marginRight="20dp"
                 android:alpha="0.5"
+                android:gravity="end"
+                android:padding="10dp"
+                android:text="No status"
                 android:textColor="@color/blue"
-                android:textSize="20sp"
-               />
+                android:textSize="20sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -156,6 +157,7 @@
                         android:textColor="#c1c1c1"
                         android:textSize="15sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -169,32 +171,35 @@
                         android:text="Thời gian cho thuê:"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
-                  <RelativeLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:paddingLeft="10dp">
-                      <TextView
-                          android:id="@+id/textView_timeRentStart"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:gravity="center_vertical"
-                          android:text="2023-06-07 12:23:12"
 
-                          android:textColor="#FF9800"
-                          android:textSize="15sp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp">
 
-                      <TextView
-                          android:id="@+id/textView_timeRentEnd"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:gravity="center_vertical"
-                          android:text="2023-06-07 12:23:12"
-                          android:textColor="#FF9800"
-                          android:textSize="15sp"
+                        <TextView
+                            android:id="@+id/textView_timeRentStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="2023-06-07 12:23:12"
 
-                          android:layout_below="@id/textView_timeRentStart"/>
-                  </RelativeLayout>
+                            android:textColor="#FF9800"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/textView_timeRentEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/textView_timeRentStart"
+                            android:gravity="center_vertical"
+                            android:text="2023-06-07 12:23:12"
+                            android:textColor="#FF9800"
+
+                            android:textSize="15sp" />
+                    </RelativeLayout>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -243,32 +248,26 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true">
 
-                        <LinearLayout
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/background_properties"
+                            android:padding="10dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/background_properties">
+                            android:src="@drawable/messenger" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="10dp"
-                                android:src="@drawable/messenger" />
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <ImageView
+                            android:id="@+id/img_phone"
                             android:layout_width="50dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/background_properties">
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="10dp"
-                                android:src="@drawable/icon_phone" />
-                        </LinearLayout>
+                            android:layout_height="match_parent"
+                            android:background="@drawable/background_properties"
+                            android:padding="10dp"
+                            android:src="@drawable/icon_phone" />
+
                     </LinearLayout>
                 </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -286,15 +285,17 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:id="@+id/layout_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:layout_marginTop="10dp">
 
                     <LinearLayout
-                        android:layout_width="105dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@drawable/background_properties"
                         android:orientation="vertical"
                         android:padding="10dp"
@@ -304,7 +305,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Top speed"
+                            android:text="Tốc độ"
                             android:textColor="@color/gray"
                             android:textSize="14sp" />
 
@@ -313,7 +314,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="400"
-
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -330,8 +330,10 @@
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
-                        android:layout_width="105dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/background_properties"
 
                         android:orientation="vertical"
@@ -343,7 +345,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Hours power"
+                            android:text="Mã lực"
                             android:textColor="@color/gray"
                             android:textSize="14sp" />
 
@@ -366,8 +368,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="105dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/background_properties"
                         android:orientation="vertical"
@@ -378,7 +381,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mileage"
+                            android:text="Tiêu thụ"
                             android:textColor="@color/gray"
                             android:textSize="14sp" />
 
@@ -399,7 +402,7 @@
                             android:textSize="14sp" />
 
                     </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView_textDescribe"
@@ -468,7 +471,7 @@ viverra maecenas accumsan lacus vel facilisis. "
             android:layout_height="match_parent"
             android:elevation="4dp"
             android:gravity="center_vertical"
-            android:text="299.000 đ/day "
+            android:text="0 đ/ngày "
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />

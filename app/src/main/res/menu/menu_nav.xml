@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:title="Home"
+            android:title="Trang chủ"
 
             app:actionViewClass="android.widget.TextView"
             app:showAsAction="always"
@@ -14,14 +14,14 @@
         <item
             android:id="@+id/nav_favourite"
             android:icon="@drawable/heart"
-            android:title="Favourite"
+            android:title="Yêu thích"
             app:actionViewClass="android.widget.TextView"
             app:showAsAction="always"
             />
         <item
             android:id="@+id/nav_notify"
             android:icon="@drawable/notifi"
-            android:title="Notify"
+            android:title="Thông báo"
             app:actionViewClass="android.widget.TextView"
             app:showAsAction="always"
             />
@@ -30,7 +30,7 @@
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/setting"
-            android:title="Setting"
+            android:title="Cài đặt"
             app:actionViewClass="android.widget.TextView"
             app:showAsAction="always"/>
     </group>

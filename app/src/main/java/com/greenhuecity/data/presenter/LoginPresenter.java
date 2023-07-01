@@ -26,7 +26,7 @@ public class LoginPresenter implements LoginContract.IPresenter {
     LoginContract.IView mView;
     LoginActivity loginActivity;
     ApiService apiService;
-    boolean isCancelled = false;
+
     ProgressDialog progressDialog;
 
     public LoginPresenter(LoginContract.IView mView, LoginActivity loginActivity) {
@@ -40,20 +40,13 @@ public class LoginPresenter implements LoginContract.IPresenter {
         String password_256 = Utils.sha256(password);
 
         progressDialog = ProgressDialog.show(context, "Loading...", "Please wait...", false, false);
-        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Huỷ công việc của bạn và ẩn ProgressDialog
-                progressDialog.dismiss();
-                isCancelled = true;
-            }
-        });
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 progressDialog.dismiss();
-                if (!isCancelled) {
+
                     if (users.isEmpty() || password.isEmpty()) {
                         mView.showErrorMessage("Vui lòng nhập tài khoản hoặc mật khẩu!");
                     } else {
@@ -86,8 +79,6 @@ public class LoginPresenter implements LoginContract.IPresenter {
                         });
                     }
                 }
-                isCancelled = false;
-            }
         }, 2000);
 
     }

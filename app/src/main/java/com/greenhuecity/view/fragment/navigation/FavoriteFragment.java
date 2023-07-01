@@ -63,12 +63,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
         mPresenter = new FavoritePresenter(this, requireContext());
         mPresenter.getCarList();
         mPresenter.getCarListAPI();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (carsList != null) changeTextSearch();
-            }
-        }, 2000);
+
         mPresenter.getUserLocation();
         mPresenter.getImgUserFromShared();
         return view;
@@ -163,6 +158,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.IView
     @Override
     public void getCarsList(List<Cars> carsList) {
         this.carsList = carsList;
+        changeTextSearch();
         completeTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

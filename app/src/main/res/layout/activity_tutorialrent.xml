@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header_draw"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:padding="2dp"
+                    android:src="@drawable/back" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="10dp"
+                android:text="Hướng dẫn thuê xe"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bước 1: Đăng ký tài khoản MotorRental"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Nếu bạn chưa có tài khoản MotorRental thì sẽ đăng ký bằng cách: "
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mở ứng dụng ->Chọn vào setting ->Chọn đăng nhập ngay"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn vào đăng ký rồi điền đầy đủ thông tin bao gồm số điện thoại, địa chỉ email, tên người dùng và mật khẩu. Sau đó quay lại phần đăng nhập và đăng nhập vào ứng dụng."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bước 2: Chọn xe hoặc tìm kiếm xe muốn thuê"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Khi đã đăng ký và đăng nhập thành công tài khoản MotorRental, bạn có thể tìm kiếm các sản phẩm mà mình muốn mua bằng sử dụng công cụ search trên trang chủ hoặc chọn chọn theo danh mục sản phẩm."
+                android:textColor="#000000"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp" />
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="5dp">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Lưu ý:"
+                 android:textColor="#D80C0C"
+                 android:textStyle="bold"
+                 android:textSize="16sp" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text=" Bạn chỉ có thể thuê xe với trạng thái xe đang rảnh"
+                 android:textColor="#000000"
+                 android:textSize="16sp" />
+         </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bước 3: Thuê xe"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sau khi chọn được xe muốn thuê các bạn click vào xe muốn thuê -> Chọn vào nút đặt xe -> Chọn thời gian mà mình muốn thuê -> Chọn vào nút thuê xe và đợi nhà phân phối xác minh đơn thuê xe của bạn."
+                android:textColor="#000000"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bước 4: Kiểm tra đơn thuê xe"
+                android:layout_marginTop="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Các bạn quay lại trang chủ -> Chọn vào setting -> Chọn vào đơn hàng của bạn. Tại đây bạn có thể xem trang thái thuê xe của bạn, nếu xe muốn thuê của bạn đã được xác mình thì bạn có thể đến lấy xe ở nhà phân phối (Nhấn vào nút Xem vị trí lấy xe ở mục đã xác nhận để biết vị trí của nhà phân phối)"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lưu ý:"
+                    android:textColor="#D80C0C"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="Sau khi đơn thuê xe của bạn được xác nhận thì bạn phải đến lấy xe không quá 7 tiếng kể từ thời gian bắt đầu thuê nếu không đơn thuê xe của bạn sẽ bị hủy."
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bước 5: Lấy xe"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sau khi đơn thuê xe của bạn được xác minh thì bạn có thể đến nhà phân phối để lấy xe. Khi đã nhận được xe các bạn vào mục đã xác nhận trong đơn hàng của bạn rồi nhấn vào đã nhận được xe lúc này bạn thể lấy xe và đi."
+                android:textColor="#000000"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lưu ý:"
+                    android:textColor="#D80C0C"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="Khi bạn đến lấy xe thì đem theo giấy tờ : CCCD và bằng lái xe."
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Video hướng dẫn chi tiết"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <WebView
+                android:layout_marginTop="10dp"
+                android:id="@+id/webview_ytb"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                tools:ignore="WebViewLayout" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

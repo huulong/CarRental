@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Huế"
+                        android:text="..."
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -68,7 +68,7 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/em_quynh"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="21dp"
             android:gravity="top"
-            android:text="Chúc một trải nghiệm rất dễ chịu"
+            android:text="Chúc bạn có một trải nghiệm vui vẻ"
             android:textColor="#c1c1c1"
             android:textSize="15sp" />
 
@@ -128,7 +128,6 @@
                     android:maxLines="1"
                     android:paddingStart="20dp"
                     android:textSize="15sp"
-                    android:textStyle="italic"
                     app:counterEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,6 +137,7 @@
                 android:layout_height="35dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/icon_search"
+
                 app:layout_constraintBottom_toBottomOf="@id/textInputLayout"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
                 app:layout_constraintTop_toTopOf="@id/textInputLayout" />
@@ -164,18 +164,54 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager2_car"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="340dp"
             android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
+            android:text="Tính năng nổi bật"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="150dp"
+               android:layout_margin="5dp"
+               app:cardCornerRadius="5dp"
+               app:cardElevation="0dp">
+               <androidx.viewpager2.widget.ViewPager2
+                   android:id="@+id/viewpager2_banner"
+                   android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                   android:background="@drawable/background_textview_rent" />
+           </androidx.cardview.widget.CardView>
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/circleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="10dp"
+                />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/textView_accessory"
             android:layout_width="match_parent"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
             android:layout_marginTop="20dp"
             android:text="Phụ kiện"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <LinearLayout

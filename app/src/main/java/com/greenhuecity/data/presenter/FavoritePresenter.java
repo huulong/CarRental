@@ -102,6 +102,9 @@ public class FavoritePresenter implements FavoriteContract.IPresenter {
     //
     @Override
     public void getUserLocation() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("network", Context.MODE_PRIVATE);
+        String location = sharedPreferences.getString("location", "");
+        if (!location.isEmpty()) mView.setUserLocation(location);
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
@@ -119,7 +122,8 @@ public class FavoritePresenter implements FavoriteContract.IPresenter {
                         String postalCode = addresses.get(0).getPostalCode();
 
                         // Gán thông tin địa chỉ vào TextView
-                        mView.setUserLocation( state+" "+ country);
+                        String add = state + ", " + country;
+                        if(add != null && !add.isEmpty())  mView.setUserLocation(add);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

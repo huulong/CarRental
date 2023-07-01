@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -98,6 +100,7 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
 
         selectDialog = new AlertDialog.Builder(this);
         mPresenter = new UploadCarPresenter(this, this);
+        mPresenter.boldText();
         mPresenter.getDataList();
         user_id = mPresenter.getUsersId();
         rndNamePhoto = mPresenter.generateRandomString();
@@ -364,6 +367,11 @@ public class UploadCarsActivity extends AppCompatActivity implements UploadCarCo
                 dialog.dismiss();
             }
         }, 2000);
+    }
+
+    @Override
+    public void setBoldTextCheckbox(SpannableString text) {
+        checkBox.setText(text);
     }
 
     public void setEventSelectDay() {

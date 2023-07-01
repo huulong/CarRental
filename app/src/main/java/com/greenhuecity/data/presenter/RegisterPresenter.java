@@ -27,7 +27,7 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
     ApiService apiService;
     List<Users> usersList = new ArrayList<>();
 
-    boolean isCancelled = false;
+
     ProgressDialog progressDialog;
 
     public RegisterPresenter(RegisterContract.IView mView, Context context) {
@@ -42,20 +42,13 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
         String pass = Utils.sha256(password);
 
         progressDialog = ProgressDialog.show(context, "Loading...", "Please wait...", false, false);
-        progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Huỷ công việc của bạn và ẩn ProgressDialog
-                progressDialog.dismiss();
-                isCancelled = true;
-            }
-        });
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 progressDialog.dismiss();
-                if (!isCancelled) {
+
                     if (name.isEmpty() || password.isEmpty() || email.isEmpty() || phone.isEmpty()) {
                         mView.showErrorMessage("Vui lòng nhập đầy đủ thông tin!");
                     } else {
@@ -78,8 +71,7 @@ public class RegisterPresenter implements RegisterContract.IPresenter {
                         }
                     }
                 }
-                isCancelled = false;
-            }
+
         }, 2999);
 
 

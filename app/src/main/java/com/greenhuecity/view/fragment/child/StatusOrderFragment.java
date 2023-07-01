@@ -1,5 +1,6 @@
 package com.greenhuecity.view.fragment.child;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import com.greenhuecity.data.model.UserOrder;
 import com.greenhuecity.data.presenter.CarPresenter;
 import com.greenhuecity.data.presenter.StatusOrderPresenter;
 import com.greenhuecity.itf.OnClickButtonUserOrder;
+import com.greenhuecity.view.activity.MapActivity;
 import com.greenhuecity.view.adapter.CarAdapter;
 import com.greenhuecity.view.adapter.UserOrderAdapter;
 import com.greenhuecity.view.fragment.bottomsheet.MapBottomSheetFragment;
@@ -95,8 +97,11 @@ public class StatusOrderFragment extends Fragment implements StatusOrderContract
 
             @Override
             public void eventMapView(UserOrder userOrder) {
-                MapBottomSheetFragment bottomSheetFragment = MapBottomSheetFragment.newInstance(userOrder);
-                bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+//                MapBottomSheetFragment bottomSheetFragment = MapBottomSheetFragment.newInstance(userOrder);
+//                bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+                Intent intent = new Intent(getActivity(), MapActivity.class);
+                intent.putExtra("order",userOrder);
+                startActivity(intent);
             }
         });
     }

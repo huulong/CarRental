@@ -9,6 +9,7 @@ import com.greenhuecity.data.model.OrderManagement;
 import com.greenhuecity.data.model.Orders;
 import com.greenhuecity.data.model.Powers;
 import com.greenhuecity.data.model.RentManagement;
+import com.greenhuecity.data.model.SlidePopup;
 import com.greenhuecity.data.model.UpdateOrder;
 import com.greenhuecity.data.model.UserOrder;
 import com.greenhuecity.data.model.Users;
@@ -70,7 +71,8 @@ public interface ApiService {
     //Xử lí đơn đặt hàng
     @POST("order-management.php")
     @FormUrlEncoded
-    Call<List<OrderManagement>> getOrderManagement(@Field("id") int id);
+    Call<List<OrderManagement>> getOrderManagement(@Field("id") int id,
+                                                   @Field("stt") String stt);
 
     //update order
     @POST("update-order.php")
@@ -79,6 +81,12 @@ public interface ApiService {
                                    @Field("order_status") String order_status,
                                    @Field("car_id") int car_id,
                                    @Field("car_status") String car_status);
+
+    //    update status car
+    @POST("update-status-cars.php")
+    @FormUrlEncoded
+    Call<Cars> updateStatusCar(@Field("car_id") int id,
+                               @Field("status") String status);
 
     //add cars
     @POST("upload-cars.php")
@@ -121,6 +129,7 @@ public interface ApiService {
     @FormUrlEncoded
     Call<List<UserOrder>> getOrderByUserIdStatus(@Field("id") int id,
                                                  @Field("stt") String stt);
+
     //profile
     @POST("update-users.php")
     @FormUrlEncoded
@@ -132,11 +141,22 @@ public interface ApiService {
                            @Field("age") String age,
                            @Field("cccd") String cccd,
                            @Field("address") String address);
+
     @POST("get-user-by-id.php")
     @FormUrlEncoded
     Call<List<Users>> getUsersById(@Field("id") int id);
+
     //
     @POST("arr-lease-cars.php")
     @FormUrlEncoded
     Call<List<LeaseCar>> getLeaseCar(@Field("id") int id);
+
+    //get Banner
+    @GET("banner.php")
+    Call<List<String>> getBanner();
+
+    //    get slide popup
+//get Banner
+    @GET("popup-banner.php")
+    Call<List<SlidePopup>> getSlidePopup();
 }

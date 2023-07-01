@@ -72,7 +72,6 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/em_quynh"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -122,7 +121,7 @@
                     android:maxLines="1"
                     android:paddingStart="20dp"
                     android:textSize="15sp"
-                    android:textStyle="italic"
+
                     app:counterEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
 

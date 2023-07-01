@@ -57,10 +57,10 @@ public class MapBottomSheetFragment extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         bottomSheetDialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_btsheet_map, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.bottomsheet_map, null);
         ImageView imgBack = view.findViewById(R.id.img_back);
         imgBack.setOnClickListener(view1->bottomSheetDialog.dismiss());
-        MapView mapView = view.findViewById(R.id.map);
+        MapView mapView = view.findViewById(R.id.mapp);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override

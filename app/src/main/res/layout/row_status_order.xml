@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="305dp"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
+
     android:backgroundTint="#FFFFFF"
     app:cardCornerRadius="25dp"
     app:cardElevation="3dp">
@@ -12,7 +13,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/header_car"
@@ -77,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:paddingBottom="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -216,7 +219,7 @@
             <Button
                 android:id="@+id/btn_location"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center_horizontal"

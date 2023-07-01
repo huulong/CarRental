@@ -1,14 +1,8 @@
 package com.greenhuecity.view.fragment.navigation;
 
-import android.Manifest;
+
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -22,37 +16,43 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.maps.model.LatLng;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.greenhuecity.R;
 import com.greenhuecity.view.activity.MainActivity;
-import com.greenhuecity.view.activity.SearchActivity;
+
 import com.greenhuecity.data.contract.HomeContract;
 import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.presenter.HomePresenter;
+import com.greenhuecity.view.adapter.BannerAdapter;
 import com.greenhuecity.view.adapter.ViewPagerHomeAdapter;
 
-import java.io.IOException;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeFragment extends Fragment implements HomeContract.IView {
     TabLayout tabLayout;
-    ViewPager2 viewPager2;
+    ViewPager2 viewPager2, viewPagerBanner;
+    CircleIndicator3 circleIndicator3;
+//    Timer timer;
     TextInputLayout inputLayout;
     AutoCompleteTextView completeTextView;
     ImageButton btnSearch;
@@ -62,6 +62,8 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
     List<Cars> carsList;
     HomePresenter mPresenter;
     String textSearch = "";
+    BannerAdapter bannerAdapter;
+
 
     @Nullable
     @Override
@@ -94,19 +96,17 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
             }
         }).attach();
         viewPager2.setUserInputEnabled(false);
-        mPresenter = new HomePresenter(this,getActivity());
+        mPresenter = new HomePresenter(this, getActivity());
         mPresenter.getCarList();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (carsList != null) changeTextSearch();
-            }
-        }, 2000);
+        mPresenter.getBanner();
+
 
         mPresenter.getUserLocation((MainActivity) getActivity());
         mPresenter.getImgUserFromShared(getActivity());
+
         return view;
     }
+
 
     private void initGUI() {
         tabLayout = view.findViewById(R.id.tablayout_brand);
@@ -116,8 +116,42 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
         btnSearch = view.findViewById(R.id.imageButton_search);
         tvLocation = view.findViewById(R.id.textView_addresLocation);
         imgUser = view.findViewById(R.id.img_user);
+        viewPagerBanner = view.findViewById(R.id.viewpager2_banner);
+        circleIndicator3 = view.findViewById(R.id.circleIndicator);
     }
 
+//    void test() {
+//
+//
+//
+//        final Handler handler = new Handler();
+//        final Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                int currenItem = viewPagerBanner.getCurrentItem();
+//                int totalItem = viewPagerBanner.getAdapter().getItemCount();
+//
+//                if (currenItem == totalItem - 1) {
+//                    viewPagerBanner.setCurrentItem(0);
+//                } else {
+//                    viewPagerBanner.setCurrentItem(currenItem + 1);
+//                }
+//            }
+//        };
+//        timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                handler.post(runnable);
+//            }
+//        }, 5000, 5000);
+//    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.stopAutoScroll();
+    }
 
     private void changeTextSearch() {
         try {
@@ -153,17 +187,16 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
     }
 
 
-
-
     @Override
     public void getCarsList(List<Cars> carsList) {
         this.carsList = carsList;
+        changeTextSearch();
         completeTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE
                         || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
-                    mPresenter.searchProcessing(carsList,textSearch);
+                    mPresenter.searchProcessing(carsList, textSearch);
                     return true;
                 }
                 return false;
@@ -172,7 +205,7 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.searchProcessing(carsList,textSearch);
+                mPresenter.searchProcessing(carsList, textSearch);
             }
         });
 
@@ -180,7 +213,7 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
 
     @Override
     public void setUserLocation(String address) {
-        tvLocation.setText(address);
+       tvLocation.setText(address);
     }
 
     @Override
@@ -201,6 +234,15 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
                 dialog.dismiss();
             }
         }, 2000);
+    }
+
+    @Override
+    public void setListBanner(List<String> mList) {
+        bannerAdapter = new BannerAdapter(getActivity(), mList);
+        viewPagerBanner.setAdapter(bannerAdapter);
+        circleIndicator3.setViewPager(viewPagerBanner);
+        mPresenter.sliderAuto(viewPagerBanner);
+
     }
 
 }

@@ -1,111 +1,61 @@
 package com.greenhuecity.view.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.greenhuecity.R;
-import com.greenhuecity.data.contract.OrderManagementContract;
-import com.greenhuecity.data.model.OrderManagement;
-import com.greenhuecity.data.presenter.OrderManagementPresenter;
-import com.greenhuecity.itf.UpdateOrderIF;
-import com.greenhuecity.view.adapter.OrderManagementAdapter;
-
-import java.util.List;
+import com.greenhuecity.view.adapter.ViewPagerMnOrderAdapter;
 
 
-public class OrderManagementActivity extends AppCompatActivity implements OrderManagementContract.IView {
-    RecyclerView rvOrder;
-    TextView tvNumberOfOrders;
+public class OrderManagementActivity extends AppCompatActivity {
     ImageView imgBack;
-    OrderManagementPresenter mPresenter;
-    OrderManagementAdapter orderManagementAdapter;
-    int id;
+    TabLayout tabLayout;
+    ViewPager2 viewPager2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_management);
-        rvOrder = findViewById(R.id.recyclerView_car);
-        tvNumberOfOrders = findViewById(R.id.textView_quantity);
+        setContentView(R.layout.activity_mn_order);
+        initGUI();
+
+        viewPager2.setAdapter(new ViewPagerMnOrderAdapter(this));
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("Chờ xác nhận");
+                    break;
+                case 1:
+                    tab.setText("Đã xác nhận");
+                    break;
+                case 2:
+                    tab.setText("Đang cho thuê");
+                    break;
+                case 3:
+                    tab.setText("Đã hoàn thành");
+                    break;
+                case 4:
+                    tab.setText("Bị hủy");
+                    break;
+
+            }
+        }).attach();
+        viewPager2.setUserInputEnabled(false);
+
+
+    }
+
+    private void initGUI() {
         imgBack = findViewById(R.id.img_back);
         imgBack.setOnClickListener(view->onBackPressed());
-        rvOrder.setHasFixedSize(true);
-        rvOrder.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mPresenter = new OrderManagementPresenter(this, this);
-        id = mPresenter.getUsersId();
-        mPresenter.getOrderManagementList(id);
-
+        tabLayout = findViewById(R.id.tablayout);
+        viewPager2 = findViewById(R.id.viewpager2_mno);
+        tabLayout.setSaveEnabled(false);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.getOrderManagementList(id);
-    }
-
-    @Override
-    public void setDataRecyclerViewOrderManagement(List<OrderManagement> mList) {
-        orderManagementAdapter = new OrderManagementAdapter(mList, this);
-        rvOrder.setAdapter(orderManagementAdapter);
-        if (mList != null) tvNumberOfOrders.setText(String.valueOf(mList.size()));
-        else tvNumberOfOrders.setText(String.valueOf(0));
-        if (orderManagementAdapter != null) {
-            eventStatusOrder();
-        }
-    }
-
-    private void eventStatusOrder() {
-        orderManagementAdapter.setUpdateOrderIF(new UpdateOrderIF() {
-            @Override
-            public void updateCofirm(int car_id, int order_id) {
-                mPresenter.updateStatusOrder(order_id, "Đã xác nhận", car_id, "Xe đang được thuê");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        onResume();
-                    }
-                }, 2000);
-            }
-
-            @Override
-            public void updateRefuse(int car_id, int order_id) {
-                mPresenter.updateStatusOrder(order_id, "Bị hủy", car_id, "Đang rảnh");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        onResume();
-                    }
-                }, 2000);
-            }
-
-            @Override
-            public void updateComplete(int car_id, int order_id) {
-                mPresenter.updateStatusOrder(order_id, "Đã hoàn thành", car_id, "Đang rảnh");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        onResume();
-                    }
-                }, 2000);
-            }
-
-            @Override
-            public void updateCancel(int car_id, int order_id) {
-                mPresenter.updateStatusOrder(order_id, "Bị hủy", car_id, "Đang rảnh");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        onResume();
-                    }
-                }, 2000);
-            }
-        });
-    }
 
 }

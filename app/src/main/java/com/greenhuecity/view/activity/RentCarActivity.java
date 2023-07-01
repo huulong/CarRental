@@ -216,5 +216,20 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
         }, 2000);
     }
 
+    @Override
+    public void failedOrders(String mess) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Đặt xe thất bại!");
+        builder.setMessage(mess);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 2000);
+    }
+
 
 }

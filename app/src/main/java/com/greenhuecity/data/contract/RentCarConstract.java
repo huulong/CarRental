@@ -28,6 +28,7 @@ public interface RentCarConstract {
 
         void notifiErrorDate(String mess);
         void successOrders(String mess);
+        void failedOrders(String mess);
 
     }
 
@@ -47,6 +48,8 @@ public interface RentCarConstract {
         String generateRandomString();
 
         int getUsersId();
+
+        void updateStatusCars(int id);
 
         void upOrders(String cod, String from_time, String end_time);
 

@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.greenhuecity.view.activity.MainActivity;
 import com.greenhuecity.R;
 import com.greenhuecity.data.contract.LoginContract;
@@ -24,7 +25,7 @@ import com.greenhuecity.view.activity.LoginActivity;
 
 public class LoginFragment extends Fragment implements LoginContract.IView {
     View view;
-    EditText edtUser, edtPassword;
+    TextInputEditText edtUser, edtPassword;
     Button btnLogin;
     TextView tvRegister;
     ImageView igBack;

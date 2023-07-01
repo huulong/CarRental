@@ -58,6 +58,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/car_header"
@@ -65,17 +66,21 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:layout_marginTop="10dp"
-                    app:cardElevation="0dp">
+                    android:layout_width="300dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="#D0F6F5F5"
+                    app:cardCornerRadius="10dp">
 
                     <ImageView
                         android:id="@+id/img_addcar"
-                        android:layout_width="280dp"
-                        android:layout_height="180dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:background="@drawable/background_properties" />
+                        android:scaleType="centerInside"
+                        android:padding="10dp"
+                       />
 
 
                     <Button
@@ -88,6 +93,7 @@
                         android:gravity="center"
                         android:padding="0dp"
                         android:text="Chọn ảnh"
+                        android:alpha="0.8"
                         android:textColor="#ffffff"
                         android:textSize="16dp" />
 
@@ -96,7 +102,7 @@
                 <EditText
                     android:id="@+id/edit_namecar"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_below="@+id/cardView"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/background_properties"
@@ -112,7 +118,8 @@
 
                     <EditText
                         android:id="@+id/edit_price"
-                        android:layout_width="230dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:background="@drawable/background_properties"
                         android:gravity="center"
@@ -121,7 +128,8 @@
 
                     <EditText
                         android:id="@+id/edit_plates"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@+id/edit_price"
@@ -142,7 +150,8 @@
 
                     <TextView
                         android:id="@+id/edit_brandName"
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:background="@drawable/background_properties"
                         android:gravity="center"
@@ -155,7 +164,8 @@
 
                     <TextView
                         android:id="@+id/edit_Distributor"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_below="@+id/edit_brandcar"
                         android:layout_marginLeft="5dp"
@@ -178,30 +188,33 @@
 
                     <EditText
                         android:id="@+id/edit_topSpeed"
-                        android:layout_width="125dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:background="@drawable/background_properties"
-                        android:hint="Tốc độ tối đa...."
+                        android:hint="Tốc độ km/h...."
                         android:textAlignment="center"
                         android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/edit_horse"
-                        android:layout_width="125dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/background_properties"
-                        android:hint="Mã lực...."
+                        android:hint="Mã lực ps...."
                         android:textAlignment="center"
                         android:textSize="14dp" />
 
                     <EditText
                         android:id="@+id/edit_mileage"
-                        android:layout_width="125dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/background_properties"
-                        android:hint="Tiêu thụ km/l.."
+                        android:hint="Tiêu thụ km/l..."
                         android:textAlignment="center"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -213,7 +226,8 @@
 
                     <TextView
                         android:id="@+id/edit_status"
-                        android:layout_width="180dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:background="@drawable/background_properties"
                         android:gravity="center"
@@ -226,7 +240,8 @@
 
                     <TextView
                         android:id="@+id/edit_power"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/background_properties"
@@ -247,7 +262,8 @@
 
                     <TextView
                         android:id="@+id/edit_fromTime"
-                        android:layout_width="190dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:background="@drawable/background_properties"
                         android:gravity="center"
@@ -260,7 +276,8 @@
 
                     <TextView
                         android:id="@+id/edit_endTime"
-                        android:layout_width="190dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/background_properties"
@@ -276,7 +293,7 @@
                 <EditText
                     android:id="@+id/edit_discription"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="150dp"
                     android:layout_marginTop="10dp"
                     android:padding="10dp"
                     android:background="@drawable/background_properties"
@@ -291,8 +308,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-
-                android:text="Đã đọc chính sách và điều khoản cho thuê của ứng dụng" />
+                android:text="Đã đọc chính sách và điều khoản sử dụng cho thuê của ứng dụng" />
             <Button
                 android:id="@+id/button_upload_cars"
                 android:layout_width="match_parent"

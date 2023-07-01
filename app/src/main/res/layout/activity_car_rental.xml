@@ -24,6 +24,7 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+
             android:layout_alignParentBottom="true"
             android:background="#f0f0f0"
             app:itemIconSize="25dp"
@@ -31,6 +32,7 @@
             app:itemTextAppearance="@style/navigatiton_textSize"
             app:itemTextColor="@color/color_navigation_bottom"
             app:menu="@menu/menu_nav" />
+<!--f0f0f0-->
 
 
     </RelativeLayout>

@@ -69,8 +69,9 @@
 
                 <Button
                     android:id="@+id/btn_regis.rental"
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="110dp"
+                    android:layout_weight="1"
                     android:background="@drawable/background_properties"
                     android:gravity="center"
                     android:lineHeight="25dp"
@@ -83,8 +84,9 @@
 
                 <Button
                     android:id="@+id/btn_order.rental"
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="110dp"
+                    android:layout_weight="1"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/background_properties"
                     android:gravity="center"
@@ -98,8 +100,9 @@
 
                 <Button
                     android:id="@+id/btn_revenue.statistics"
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="110dp"
+                    android:layout_weight="1"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/background_properties"
                     android:gravity="center"

@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.model.Users;
 import com.greenhuecity.data.remote.ApiService;
 import com.greenhuecity.data.remote.RetrofitClient;
+import com.greenhuecity.util.NetworkUtils;
 import com.greenhuecity.view.activity.MainActivity;
 import com.greenhuecity.view.activity.SearchActivity;
 
@@ -36,6 +38,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,8 +49,9 @@ public class HomePresenter implements HomeContract.IPresenter {
     HomeContract.IView mView;
     ApiService apiService;
     Context context;
+    Timer timer;
 
-    public HomePresenter(HomeContract.IView mView,Context context) {
+    public HomePresenter(HomeContract.IView mView, Context context) {
         this.mView = mView;
         apiService = RetrofitClient.getClient().create(ApiService.class);
         this.context = context;
@@ -69,9 +74,12 @@ public class HomePresenter implements HomeContract.IPresenter {
     }
 
 
-
     @Override
     public void getUserLocation(MainActivity activity) {
+            SharedPreferences sharedPreferences = activity.getSharedPreferences("network", Context.MODE_PRIVATE);
+            String location = sharedPreferences.getString("location", "");
+            if (!location.isEmpty()) mView.setUserLocation(location);
+
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
@@ -89,7 +97,14 @@ public class HomePresenter implements HomeContract.IPresenter {
                         String postalCode = addresses.get(0).getPostalCode();
 
                         // Gán thông tin địa chỉ vào TextView
-                        mView.setUserLocation( state+" "+ country);
+                        String add = state + ", " + country;
+                       if(add != null && !add.isEmpty()) {
+                           mView.setUserLocation(add);
+//                        Lưu vào bộ nhớ tạm
+                           SharedPreferences.Editor editor = activity.getSharedPreferences("network", Context.MODE_PRIVATE).edit();
+                           editor.putString("location", add);
+                           editor.apply();
+                       }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -136,8 +151,59 @@ public class HomePresenter implements HomeContract.IPresenter {
             Intent intent = new Intent(context, SearchActivity.class);
             intent.putExtra("list", (Serializable) filteredList);
             context.startActivity(new Intent(intent));
-        }else{
+        } else {
             mView.notifiEmptyText();
         }
     }
+
+    @Override
+    public void getBanner() {
+        apiService.getBanner().enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                List<String> mList = response.body();
+                mView.setListBanner(mList);
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void sliderAuto(ViewPager2 viewPager2) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                int currenItem = viewPager2.getCurrentItem();
+                int totalItem = viewPager2.getAdapter().getItemCount();
+
+                if (currenItem == totalItem - 1) {
+                    viewPager2.setCurrentItem(0);
+                } else {
+                    viewPager2.setCurrentItem(currenItem + 1);
+                }
+            }
+        };
+        stopAutoScroll();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+            }
+        }, 5000, 5000);
+    }
+
+    @Override
+    public void stopAutoScroll() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarRental</string>
+    <string name="app_name">MotorRental</string>
     <dimen name="item_height_car">250dp</dimen>
     <string name="mapbox_access_token">AIzaSyDKhV86CCjNXNLM83nU_BlsGJTq3PsSdVk</string>
 </resources>
