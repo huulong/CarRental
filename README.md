@@ -12,7 +12,7 @@ Với một giao diện thân thiện và dễ sử dụng, Car Rental là ứng
 - [@Trương Văn Khánh](https://www.github.com/#)(DataEnginer)
 - [@Nguyễn Phúc Lâm](https://www.github.com/#)(cheers)
 - [@Lê Văn Quốc Đạt](https://www.github.com/#)(Design)
-- [@Trần Nhật Hiệp](https://www.github.com/#)(cheers)
+- [@Trần Nhật Hiệp](https://www.github.com/#)(Dev)
 - [@Phùng Hữu Long](https://www.github.com/#)(Leader)
 
 ![Logo](https://i.imgur.com/Xta6m0A.png)
