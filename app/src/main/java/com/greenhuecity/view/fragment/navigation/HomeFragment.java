@@ -3,6 +3,7 @@ package com.greenhuecity.view.fragment.navigation;
 
 import android.app.AlertDialog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -12,11 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +27,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.greenhuecity.R;
+import com.greenhuecity.view.activity.ChatBotActivity;
 import com.greenhuecity.view.activity.MainActivity;
 
 import com.greenhuecity.data.contract.HomeContract;
@@ -58,6 +56,7 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
     ImageButton btnSearch;
     TextView tvLocation;
     CircleImageView imgUser;
+    ImageView imagechat;
     View view;
     List<Cars> carsList;
     HomePresenter mPresenter;
@@ -109,6 +108,7 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
 
 
     private void initGUI() {
+        imagechat = view.findViewById(R.id.img_chat);
         tabLayout = view.findViewById(R.id.tablayout_brand);
         viewPager2 = view.findViewById(R.id.viewpager2_car);
         inputLayout = view.findViewById(R.id.textInputLayout);
@@ -208,7 +208,12 @@ public class HomeFragment extends Fragment implements HomeContract.IView {
                 mPresenter.searchProcessing(carsList, textSearch);
             }
         });
-
+        imagechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagechat.setOnClickListener(view -> startActivity(new Intent(requireContext(),ChatBotActivity.class)));
+            }
+        });
     }
 
     @Override

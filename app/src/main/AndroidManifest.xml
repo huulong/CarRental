@@ -64,6 +64,7 @@
             android:name=".view.activity.CarDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.activity.RentCarActivity"
             android:exported="false"
@@ -72,6 +73,10 @@
             android:name=".view.activity.SearchActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+                android:name=".view.activity.ChatBotActivity"
+                android:exported="true"
+                android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.UploadCarsActivity"
             android:exported="false"
@@ -100,6 +105,16 @@
             android:name=".view.activity.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+
+
+        <service
+                android:name=".MyFirebaseMessagingService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

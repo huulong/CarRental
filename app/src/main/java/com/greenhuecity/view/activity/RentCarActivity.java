@@ -3,6 +3,7 @@ package com.greenhuecity.view.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -36,10 +37,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RentCarActivity extends AppCompatActivity implements OnMapReadyCallback, RentCarConstract.IView {
-    TextView tvName, tvBrand, tvDeparture_day, tvReturn_day, tvDistance, tvLocation, tvPay, tvDistributors, textView_priceDetail, tvStartTimeCar, tvEndTimeEnd;
+    TextView tvName, tvBrand, tvDeparture_day, tvReturn_day, tvDistance, tvLocation, tvPay, tvDistributors, textView_priceDetail, tvStartTimeCar, tvEndTimeEnd,textView3,textView_momo;
     ImageView imgCalendarStar, imgCalendarEnd, imgBack;
     CircleImageView igDistributors;
     LinearLayout layoutPay;
+    private TextView paymentMethodTextView;
     double latitude, longitude, price;
     private LocationManager locationManager;
     CarDistributor carDist;
@@ -57,6 +59,15 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        mPresenter = new RentCarPresenter(this, this, locationManager);
+        LinearLayout linearLayout = findViewById(R.id.linearLayout3);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.showPaymentMethodsDialog();
+            }
+        });
+        mPresenter.showPaymentMethodsDialog();
         Locale locale = new Locale("vi", "VN");
         currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -67,6 +78,8 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        //Khởi tạo dialog
+
         // Khởi tạo LocationManager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mPresenter = new RentCarPresenter(this, RentCarActivity.this, locationManager);
@@ -96,8 +109,10 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
         imgBack = findViewById(R.id.img_back);
         imgBack.setOnClickListener(view->onBackPressed());
         //khởi tạo các Calendar
-
-    }
+        paymentMethodTextView = findViewById(R.id.textView_momo);
+        textView3 = findViewById(R.id.textView3); // Thay R.id.textView3 bằng ID thực tế của TextView textView3 trong layout của bạn
+        textView_momo = findViewById(R.id.textView_momo); // Thay R.id.textView_momo bằng ID thực tế của TextView textView_momo trong layout của bạn
+         }
 
     void eventButtonOrders() {
         layoutPay.setOnClickListener(new View.OnClickListener() {
@@ -229,6 +244,42 @@ public class RentCarActivity extends AppCompatActivity implements OnMapReadyCall
                 dialog.dismiss();
             }
         }, 2000);
+    }
+
+    @Override
+    public void showPaymentMethods(String[] paymentMethods) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Chọn phương thức thanh toán")
+                .setItems(paymentMethods, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String selectedMethod = paymentMethods[which];
+                        // Thực hiện hành động tương ứng với phương thức thanh toán được chọn
+
+                        // Cập nhật TextView tùy theo phương thức thanh toán được chọn
+                        if (selectedMethod.equals("Thanh Toán bằng tiền mặt")) {
+                            textView3.setText("Thanh toán trực tiếp");
+                            textView_momo.setText("Thanh toán khi nhận được xe");
+                        } else if (selectedMethod.equals("ZaloPay")) {
+                            textView3.setText("ZaloPay");
+                            textView_momo.setText("Thanh toán ví điện tử ZaloPay");
+                        } else {
+                            textView3.setText("ATM(ComingSoon");
+                            textView_momo.setText("Thanh toán bằng thẻ ngân hàng");
+                        }
+
+                        // ... (các lựa chọn phương thức khác)
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

@@ -29,6 +29,7 @@ public interface RentCarConstract {
         void notifiErrorDate(String mess);
         void successOrders(String mess);
         void failedOrders(String mess);
+        void showPaymentMethods(String[] paymentMethods);
 
     }
 
@@ -55,6 +56,7 @@ public interface RentCarConstract {
 
         void upOrderItems(int car_id, int order_id, double price);
         void loadOrderProcessing(String from_time,String end_time,double price,int car_id);
+        void showPaymentMethodsDialog();
 
     }
 }

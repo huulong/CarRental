@@ -22,23 +22,24 @@
             android:paddingBottom="20dp">
 
             <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:id="@+id/linearLayout4"
+                android:layout_width="280dp"
+                android:layout_height="54dp"
                 android:layout_margin="10dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="39dp"
+                    android:layout_height="41dp"
                     android:background="@drawable/background_properties"
                     android:padding="10dp"
                     android:src="@drawable/location"
                     app:tint="#676565" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="230dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
@@ -64,14 +65,29 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_user"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="31dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="4dp"
 
+                android:src="@drawable/icon_user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.461" />
+
+            <ImageView
+                android:id="@+id/img_chat"
+                android:layout_width="42dp"
+                android:layout_height="33dp"
+                android:src="@drawable/chaticon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/img_user"
+                app:layout_constraintHorizontal_bias="0.352"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.507"
+                tools:ignore="MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

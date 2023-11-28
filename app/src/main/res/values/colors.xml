@@ -13,4 +13,8 @@
     <color name="contentTextColor">#020000</color>
     <color name="imageBorderColor">#E01E7A</color>
     <color name="miniTitle">#2A2E43</color>
+    <color name="colorTheme">#2196F3</color>
+    <color name="colorBackground">@color/white</color>
+    <color name="colorTextBlack">#FF000000</color>
+    <color name="teal_700">#FF018786</color>
 </resources>

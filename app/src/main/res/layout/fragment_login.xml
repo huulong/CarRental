@@ -3,15 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/background_login"
-    >
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="10dp"
-        >
+        android:layout_margin="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,32 +30,39 @@
                     android:padding="2dp"
                     android:src="@drawable/back" />
             </androidx.cardview.widget.CardView>
-
-            <ImageView
-                android:layout_width="190dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:src="@drawable/logo_carr"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Đăng nhập"
-            android:textAlignment="center"
-            android:textColor="#2487FF"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+                style="@style/text_view_color_theme_style"
+                android:text= "@string/greetings"
+                android:textSize="24sp"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                style="@style/text_view_color_normal_style"
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:text="@string/welcome_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                style="@style/text_view_color_normal_style"
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:text="@string/enter_email_and_password_to_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:startIconDrawable="@drawable/icon_user">
+            app:startIconDrawable="@drawable/icon_user"
+        android:alpha="0.5">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textUser"
@@ -74,7 +78,8 @@
             app:counterMaxLength="32"
             android:layout_marginTop="10dp"
             app:passwordToggleEnabled="true"
-            app:counterEnabled="true">
+            app:counterEnabled="true"
+        android:alpha="0.5">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_Pass"
                 android:maxLength="32"
@@ -100,7 +105,8 @@
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/blue"
-            android:text="Đăng nhập"
+            android:text="Đăng Nhập"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="20dp"
             app:cornerRadius="10dp" />
@@ -132,15 +138,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:src="@drawable/icon_fb"
-                android:padding="12dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/box_icon"
-                />
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="55dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:src="@drawable/icon_fb"-->
+<!--                android:padding="12dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:background="@drawable/box_icon"-->
+<!--                />-->
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="55dp"
@@ -150,15 +156,15 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/box_icon"
                 />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:src="@drawable/icon_apple"
-                android:padding="12dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/box_icon"
-                />
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="55dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:src="@drawable/icon_apple"-->
+<!--                android:padding="12dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:background="@drawable/box_icon"-->
+<!--                />-->
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

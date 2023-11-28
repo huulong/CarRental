@@ -1,6 +1,7 @@
 package com.greenhuecity.data.presenter;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -347,6 +348,32 @@ public class RentCarPresenter implements RentCarConstract.IPresenter {
 
             }
         }, 2000);
+    }
+
+    @Override
+    public void showPaymentMethodsDialog() {
+        // Danh sách phương thức thanh toán
+        final String[] paymentMethods = {"Thanh toán bằng tiền mặt", "ZaloPay", "ATM(ComingSoon)"};
+        mView.showPaymentMethods(paymentMethods);
+        AlertDialog.Builder builder = new AlertDialog.Builder(rentCarActivity);
+        builder.setTitle("Chọn phương thức thanh toán")
+                .setItems(paymentMethods, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String selectedMethod = paymentMethods[which];
+                        // Xử lý khi người dùng chọn một trong các phương thức thanh toán
+                        // Ví dụ: Hiển thị thông báo, chuyển màn hình, hoặc thực hiện hành động mong muốn
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

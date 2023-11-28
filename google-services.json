@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730228041196",
+    "project_id": "carmobile-14e11",
+    "storage_bucket": "carmobile-14e11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730228041196:android:dec26e35e2e83059baccc9",
+        "android_client_info": {
+          "package_name": "com.greenhuecity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZrkDin2LIEHCf16hYMbBHab-54mrodO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
