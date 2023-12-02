@@ -16,12 +16,12 @@ public class ViewPagerOrderSAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 0: return new StatusOrderFragment("Chờ xác nhận");
-            case 1: return  new StatusOrderFragment("Đã xác nhận");
-            case 2: return  new StatusOrderFragment("Đang được thuê");
-            case 3: return new StatusOrderFragment("Đã hoàn thành");
-            case 4: return new StatusOrderFragment("Bị hủy");
-            default: return new StatusOrderFragment("Đang được thuê");
+            case 0: return new StatusOrderFragment("Chờ Xác Nhận");
+            case 1: return  new StatusOrderFragment("Đã Xác Nhận");
+            case 2: return  new StatusOrderFragment("Đang Được Thuê");
+            case 3: return new StatusOrderFragment("Đã Hoàn Thành");
+            case 4: return new StatusOrderFragment("Bị Hủy");
+            default: return new StatusOrderFragment("Đang được Thuê");
         }
 
     }

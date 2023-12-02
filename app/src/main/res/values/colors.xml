@@ -5,7 +5,7 @@
     <color name="blue">#107EED</color>
     <color name="gray">#c1c1c1</color>
     <color name="colorPrimary">#11CFC5</color>
-    <color name="colorPrimaryDark">#000</color>
+    <color name="colorPrimaryDark">#00000000</color>
     <color name="colorAccent">#FF402D</color>
 
     <!--colors for light mode-->

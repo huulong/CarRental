@@ -86,10 +86,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="No status"
+                android:textStyle="bold"
                 android:textColor="@color/blue"
                 android:textSize="20sp" />
 
@@ -128,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="top"
                     android:text="Thuê xe máy"
+                    android:textStyle="bold"
                     android:textColor="#c1c1c1"
                     android:textSize="15sp" />
 

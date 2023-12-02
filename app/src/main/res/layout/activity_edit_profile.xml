@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_login"
-    >
+    android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -63,7 +61,7 @@
                     android:id="@+id/imgview_imgUser"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/user_dp"
+                    android:src="@drawable/user2"
                     />
                 <Button
                     android:id="@+id/button_choosephoto"

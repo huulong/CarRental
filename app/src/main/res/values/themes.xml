@@ -1,7 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.CarRental" parent="Theme.Material3.DayNight.NoActionBar">
-
+        <!-- Đảm bảo thanh trạng thái (status bar) hiển thị với màu sáng hay tối tùy thuộc vào nền -->
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Đặt màu nền cho thanh trạng thái -->
+        <item name="android:statusBarColor">#00FFFFFF</item>
     </style>
 
     <style name="Theme.CarRental" parent="Base.Theme.CarRental" >

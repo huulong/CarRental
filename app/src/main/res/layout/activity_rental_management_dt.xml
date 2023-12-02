@@ -98,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:textStyle="bold"
                     android:text="Thuê xe máy"
                     android:textColor="#c1c1c1"
                     android:textSize="15sp" />

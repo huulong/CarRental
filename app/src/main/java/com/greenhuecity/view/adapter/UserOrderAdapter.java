@@ -71,23 +71,23 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
         holder.tvStatus.setText(userOrder.getStatus());
 
         switch (userOrder.getStatus()) {
-            case "Đã xác nhận":
+            case "Đã Xác Nhận":
                 holder.btnCancel.setVisibility(View.VISIBLE);
                 holder.btnConfirm.setVisibility(View.VISIBLE);
 
                 break;
-            case "Chờ xác nhận":
+            case "Chờ Xác Nhận":
                 holder.btnCancel.setVisibility(View.VISIBLE);
                 holder.btnLocation.setVisibility(View.GONE);
                 break;
-            case "Đã hoàn thành":
+            case "Đã Hoàn Thành":
                 holder.tvComplete.setVisibility(View.VISIBLE);
-                holder.tvComplete.setText("Đã thuê");
+                holder.tvComplete.setText("Đã Thuê");
                 holder.btnLocation.setVisibility(View.GONE);
                 break;
-            case "Bị hủy":
+            case "Bị Hủy":
                 holder.tvComplete.setVisibility(View.VISIBLE);
-                holder.tvComplete.setText("Bị hủy");
+                holder.tvComplete.setText("Bị Hủy");
                 holder.btnLocation.setVisibility(View.GONE);
                 break;
         }

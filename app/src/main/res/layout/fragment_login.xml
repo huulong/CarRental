@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:startIconDrawable="@drawable/icon_user"
+            app:startIconDrawable="@drawable/ic_action_name"
         android:alpha="0.5">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -74,7 +74,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/icon_pass"
+            app:startIconDrawable="@drawable/baseline_password_24"
             app:counterMaxLength="32"
             android:layout_marginTop="10dp"
             app:passwordToggleEnabled="true"

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "863482140577",
-    "project_id": "carrental-cce92",
-    "storage_bucket": "carrental-cce92.appspot.com"
+    "project_number": "730228041196",
+    "project_id": "carmobile-14e11",
+    "storage_bucket": "carmobile-14e11.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:863482140577:android:163cbeaebc1ad464691de0",
+        "mobilesdk_app_id": "1:730228041196:android:dec26e35e2e83059baccc9",
         "android_client_info": {
           "package_name": "com.greenhuecity"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAToiWRZfN5Ya9wjPtiG-4anSysnQv6Iv8"
+          "current_key": "AIzaSyBZrkDin2LIEHCf16hYMbBHab-54mrodO8"
         }
       ],
       "services": {

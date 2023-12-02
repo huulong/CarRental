@@ -18,6 +18,7 @@ public class NotifyFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_notify,container,false);
 
         return view;
+
     }
 
 }

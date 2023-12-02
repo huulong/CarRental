@@ -17,12 +17,12 @@ public class ViewPagerMnOrderAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 0: return new MnOrderFragment("Chờ xác nhận");
-            case 1: return  new MnOrderFragment("Đã xác nhận");
-            case 2: return  new MnOrderFragment("Đang được thuê");
-            case 3: return new MnOrderFragment("Đã hoàn thành");
-            case 4: return new MnOrderFragment("Bị hủy");
-            default: return new MnOrderFragment("Chờ xác nhận");
+            case 0: return new MnOrderFragment("Chờ Xác Nhận");
+            case 1: return  new MnOrderFragment("Đã Xác Nhận");
+            case 2: return  new MnOrderFragment("Đang Được Thuê");
+            case 3: return new MnOrderFragment("Đã Hoàn Thành");
+            case 4: return new MnOrderFragment("Bị Hủy");
+            default: return new MnOrderFragment("Chờ Xác Nhận");
         }
 
     }

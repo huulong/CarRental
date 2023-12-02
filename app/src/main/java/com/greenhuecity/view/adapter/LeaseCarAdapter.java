@@ -56,12 +56,12 @@ public class LeaseCarAdapter extends RecyclerView.Adapter<LeaseCarAdapter.ViewHo
         holder.tvFromTime.setText(leaseCar.getFrom_time());
         holder.tvEndTime.setText(leaseCar.getEnd_time());
         holder.tvUserName.setText(leaseCar.getName());
-        holder.tvPrice.setText(currencyFormatter.format(leaseCar.getPrice()) + "/ngày");
+        holder.tvPrice.setText(currencyFormatter.format(leaseCar.getPrice()) + "/Ngày");
         holder.tvStatus.setText(leaseCar.getStatus());
         String approve = leaseCar.getApprove();
-        if (approve.equals("Yes")) holder.tvApprove.setText("Đã cấp phép");
-        else if (approve.equals("Pending")) holder.tvApprove.setText("Chờ cấp phép");
-        else if (approve.equals("No")) holder.tvApprove.setText("Không cấp phép");
+        if (approve.equals("Yes")) holder.tvApprove.setText("Đã Cấp Phép");
+        else if (approve.equals("Pending")) holder.tvApprove.setText("Chờ Cấp Phép");
+        else if (approve.equals("No")) holder.tvApprove.setText("Không Cấp Phép");
 
     }
 

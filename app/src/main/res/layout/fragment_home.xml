@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="89dp"
             android:layout_alignParentTop="true"
             android:orientation="horizontal"
             android:paddingStart="10dp"
@@ -32,7 +32,7 @@
 
                 <ImageView
                     android:layout_width="39dp"
-                    android:layout_height="41dp"
+                    android:layout_height="39dp"
                     android:background="@drawable/background_properties"
                     android:padding="10dp"
                     android:src="@drawable/location"
@@ -68,13 +68,13 @@
                 android:layout_width="31dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="16dp"
 
-                android:src="@drawable/icon_user"
+                android:src="@drawable/ic_action_name"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.461" />
+                app:layout_constraintVertical_bias="0.478" />
 
             <ImageView
                 android:id="@+id/img_chat"
@@ -90,16 +90,51 @@
                 tools:ignore="MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:text="Thursday, 12/12/2023"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header"
+                tools:ignore="NotSibling" />
+
+            <TextView
+                android:id="@+id/txtWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableStart="@drawable/ic_sunny_cloudy"
+                android:drawablePadding="10dp"
+                android:text="39 độ C"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/txtDate"
+                app:layout_constraintTop_toBottomOf="@+id/header"
+                tools:ignore="NotSibling" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <TextView
             android:id="@+id/b_n_ang_t_m"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="394dp"
+            android:layout_height="27dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="18dp"
             android:text="Bạn đang tìm thuê xe..."
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -112,7 +147,7 @@
             android:gravity="top"
             android:text="Chúc bạn có một trải nghiệm vui vẻ"
             android:textColor="#c1c1c1"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

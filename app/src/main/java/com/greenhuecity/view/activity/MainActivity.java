@@ -31,7 +31,16 @@ import com.greenhuecity.data.presenter.MainPresenter;
 import com.greenhuecity.view.adapter.ViewPagerAdapter;
 import com.greenhuecity.view.adapter.ViewPagerPopUpAdapter;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements MainContract.IView {
     ViewPager2 viewPager2;
@@ -197,4 +206,5 @@ public class MainActivity extends AppCompatActivity implements MainContract.IVie
             }
         });
     }
+
 }

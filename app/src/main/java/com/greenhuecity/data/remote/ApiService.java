@@ -1,5 +1,6 @@
 package com.greenhuecity.data.remote;
 
+import com.greenhuecity.WeatherForecast.WeatherForecast;
 import com.greenhuecity.data.model.Brands;
 import com.greenhuecity.data.model.Cars;
 import com.greenhuecity.data.model.Distributors;
@@ -15,12 +16,14 @@ import com.greenhuecity.data.model.UserOrder;
 import com.greenhuecity.data.model.Users;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 
 public interface ApiService {
 
@@ -41,6 +44,12 @@ public interface ApiService {
                               @Field("password") String password,
                               @Field("fullname") String fullName,
                               @Field("phone") String phone);
+    //resetpass
+    @POST("reset-password.php")
+    @FormUrlEncoded
+    Call<String> resetPassword(@Field("email") String email,
+                               @Field("old_password") String oldPassword,
+                               @Field("new_password") String newPassword);
 
     //Lấy danh sách distributors
     @GET("arr-distributor.php")
@@ -159,4 +168,8 @@ public interface ApiService {
 //get Banner
     @GET("popup-banner.php")
     Call<List<SlidePopup>> getSlidePopup();
+    /************** WEATHER FORCASE - OPEN WEATHER MAP.ORG **********/
+    @GET("https://api.openweathermap.org/data/2.5/weather")
+    Call<WeatherForecast> getCurrentWeather(@QueryMap Map<String, String> parameters);
 }
+

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg"
     android:scrollbars="none">
 
     <LinearLayout
@@ -45,7 +44,7 @@
                 android:layout_marginBottom="5dp"
                 android:padding="5dp"
                 android:src="@drawable/edit"
-                app:tint="@color/white" />
+                app:tint="@color/black" />
 
         </RelativeLayout>
 
